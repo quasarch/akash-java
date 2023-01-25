@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.quasarch</groupId>
+    <artifactId>akash-java</artifactId>
+    <version>0.1</version>
+    <description>Akash network client. Supports communication with akash network. For more information see LINK_HERE for spec</description>
+    <url>LINK_HERE</url>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- testing -->
+        <junit.version>5.9.2</junit.version>
+        <easymock.version>5.1.0</easymock.version>
+        <mockito-core>5.0.0</mockito-core>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.vavr</groupId>
+            <artifactId>vavr</artifactId>
+            <version>1.0.0-alpha-4</version>
+        </dependency>
+
+        <!-- testing start -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <optional>false</optional>
+            <scope>test</scope>
+            <version>${junit.version}</version>
+        </dependency>
+        <dependency>
+            <artifactId>easymock</artifactId>
+            <groupId>org.easymock</groupId>
+            <optional>false</optional>
+            <scope>test</scope>
+            <version>${easymock.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito-core}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- testing end -->
+    </dependencies>
+
+</project>
