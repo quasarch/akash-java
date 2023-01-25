@@ -33,3 +33,6 @@ Currently supported features include:
 
 This client was built based on
 this [https://github.com/akash-network/community/blob/main/sig-clients/client-libraries/prd.md][spec]
+
+### Rest endpoint
+[Swagger][https://akash.c29r3.xyz/api/swagger/] 
