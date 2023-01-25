@@ -41,7 +41,7 @@ public interface Akash {
      * R_03	List deployments	List all deployments matching the filters with consideration for page limits. Request through REST.	1
      * R_04	Get deployment	Request through REST.	1
      * R_05	List bids	Get the list of bids based on a set of filters. Request through REST.	1
-     * R_06	Create lease	Request through RPC.	1		
+     * R_06	Create lease	Request through RPC.	1
      * R_07	Get lease	Get information regarding a lease such as its status. Request through REST.	1
      * R_08	Send manifest	Request through RPC.
      */
