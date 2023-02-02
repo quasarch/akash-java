@@ -50,16 +50,16 @@ public interface Akash {
      * @param page               page number, 0 based index. Defaults to 0
      * @param resultPerPage      how many results per page. max is ??. Default to 10
      * @param deploymentSequence Deployment sequence number
-     * @return Either {@link OperationFailure} or - if successful - {@link AkashPage<Deployment>}
+     * @return Either {@link OperationFailure} or - if successful - {@link AkashPage< Deployment >}
      * @implSpec Request through REST.
      */
     Either<OperationFailure, AkashPage<Deployment>> listDeployments(@Nullable Short page,
-                                                                    @Nullable Short resultPerPage,
-                                                                    String deploymentSequence);
+                                                                        @Nullable Short resultPerPage,
+                                                                        String deploymentSequence);
 
     /**
      * @param deploymentSequence Deployment sequence number
-     * @return Either {@link OperationFailure} or - if successful - {@link Iterable<Deployment>}
+     * @return Either {@link OperationFailure} or - if successful - {@link Iterable< Deployment >}
      */
     Either<OperationFailure, Iterable<Deployment>> listDeployments(String deploymentSequence);
 
@@ -92,12 +92,15 @@ public interface Akash {
      * Get the list of bids based on a set of filters.
      *
      * @param deploymentSequence The deployment sequence
-     * @param groupSequence      ?? -> 0 to x
-     * @param oSeq               ??
+     * @param groupSequence      GSEQ is used to distinguish “groups” of containers in a deployment.
+     *                           Each group can be leased independently -
+     *                           orders, bids, and leases all act on a single group.
+     * @param oSeq               Akash OSEQ is used to distinguish multiple orders associated with a single deployment.
      * @param providerId         identification of the provider
      * @param state              ??
      * @return Either {@link OperationFailure} or - if successful - an {@link Iterable<Bid>}
      * @implSpec Request through REST.
+     *
      */
     Either<OperationFailure, Iterable<Bid>> listBids(String deploymentSequence, String groupSequence,
                                                      String oSeq, String providerId, String state);

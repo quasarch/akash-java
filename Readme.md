@@ -36,3 +36,9 @@ this [https://github.com/akash-network/community/blob/main/sig-clients/client-li
 
 ### Rest endpoint
 [Swagger][https://akash.c29r3.xyz/api/swagger/] 
+
+# Open issues
+
+## json format on deployments
+There's a "resources" inside of resources
+https://akash.c29r3.xyz/api/swagger/#/Query/Deployments
