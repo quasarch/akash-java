@@ -10,18 +10,26 @@ import org.quasarch.akash.model.Bid;
 import org.quasarch.akash.model.Deployment;
 import org.quasarch.akash.model.DeploymentLease;
 import org.quasarch.akash.model.OperationFailure;
+import org.quasarch.akash.uri.QueryParam;
 
 import java.io.IOException;
 import java.net.URI;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.function.Function;
 import java.util.function.Supplier;
+
+import static org.quasarch.akash.uri.UriUtils.addQueryParameters;
 
 /**
  * Implementation of {@link Akash}.
@@ -29,10 +37,12 @@ import java.util.function.Supplier;
 public final class AkashClient implements Akash {
     private final String accountAddress;
     private final URI baseUri;
+    private final Function<URI,HttpRequest.Builder> httpRequestBuilderSupplier;
 
-    public AkashClient(String accountAddress, URI baseUri) {
+    public AkashClient(String accountAddress, URI baseUri, Function<URI,HttpRequest.Builder> httpRequestBuilderSupplier) {
         this.accountAddress = accountAddress;
         this.baseUri = baseUri;
+        this.httpRequestBuilderSupplier = httpRequestBuilderSupplier;
     }
 
     @Override
@@ -60,11 +70,26 @@ public final class AkashClient implements Akash {
 
     @Override
     public Either<OperationFailure, Iterable<Deployment>> listDeployments(String deploymentSequence) {
-        var listDeploymentUri = baseUri.resolve(baseUri.getPath() + "/akash/deployment/v1beta2/deployments/list");
-        var request = HttpRequest
-                .newBuilder(listDeploymentUri)
-                .GET().build();
-        
+        // TODO util to add query params
+
+        var requestUri = addQueryParameters(
+                baseUri,
+                new QueryParam("filters.owner", accountAddress),
+                new QueryParam("filters.dseq", deploymentSequence),
+                // TODO what is state?
+                new QueryParam("filters.state", null),
+                new QueryParam("pagination.key", null),
+                new QueryParam("pagination.offset", null),
+                new QueryParam("pagination.limit", null),
+                new QueryParam("pagination.count_total", null)
+        );
+
+
+        var request =
+                httpRequestBuilderSupplier.apply(requestUri)
+                .GET()
+                .build();
+
         var bodyFuture = HttpClient
                 .newHttpClient()
                 .sendAsync(request, HttpResponse.BodyHandlers.ofString())

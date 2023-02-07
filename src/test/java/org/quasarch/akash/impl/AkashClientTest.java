@@ -3,6 +3,9 @@ package org.quasarch.akash.impl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Unit test for {@link AkashClient} implementation
+ */
 class AkashClientTest {
 
     @Test
