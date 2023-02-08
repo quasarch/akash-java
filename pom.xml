@@ -4,34 +4,54 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <packaging>jar</packaging>
     <groupId>org.quasarch</groupId>
     <artifactId>akash-java</artifactId>
     <version>0.1</version>
     <description>Akash network client. Supports communication with akash network. For more information see LINK_HERE for spec</description>
     <url>LINK_HERE</url>
+<!--    <modules>
+        <module>examples</module>
+    </modules>-->
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.debuglevel>vars
+        </maven.compiler.debuglevel>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- testing -->
         <junit.version>5.9.2</junit.version>
         <easymock.version>5.1.0</easymock.version>
         <mockito-core>5.0.0</mockito-core>
+        <jackson.version>2.14.1</jackson.version>
     </properties>
+
 
     <dependencies>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.14.1</version>
+            <version>${jackson.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
 
         <dependency>
             <groupId>io.vavr</groupId>
             <artifactId>vavr</artifactId>
             <version>1.0.0-alpha-4</version>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.6</version>
+        </dependency>
+
 
         <!-- testing start -->
         <dependency>
@@ -40,6 +60,17 @@
             <optional>false</optional>
             <scope>test</scope>
             <version>${junit.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>5.1.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mock-server</groupId>
+            <artifactId>mockserver-junit-jupiter-no-dependencies</artifactId>
+            <version>5.14.0</version>
         </dependency>
         <dependency>
             <artifactId>easymock</artifactId>
@@ -54,6 +85,11 @@
             <version>${mockito-core}</version>
             <scope>test</scope>
         </dependency>
+        <!-- for test logs -->
+
+
+
+
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>

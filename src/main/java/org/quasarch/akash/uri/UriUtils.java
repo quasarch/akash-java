@@ -10,8 +10,9 @@ public class UriUtils {
     public static URI addQueryParameters(URI basePath, QueryParam... params) {
         var querySection = Stream
                 .of(params)
+                .filter(QueryParam::hasValue)
                 .reduce(new StringBuilder("?"),
-                        (result, param) -> result.append(param.escaped()), StringBuilder::append)
+                        (result, param) -> result.append(param.escaped()).append("&"), StringBuilder::append)
                 .toString();
 
         return basePath.resolve(

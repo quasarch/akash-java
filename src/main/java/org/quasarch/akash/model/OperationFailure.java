@@ -5,3 +5,4 @@ public record OperationFailure(String failureMessage) {
         return new OperationFailure(io.toString());
     }
 }
+

@@ -2,11 +2,12 @@ package org.quasarch.akash;
 
 import io.vavr.control.Either;
 import org.jetbrains.annotations.Nullable;
-import org.quasarch.akash.model.AkashPage;
+import org.quasarch.akash.model.PagedResponse;
 import org.quasarch.akash.model.Bid;
-import org.quasarch.akash.model.Deployment;
+
 import org.quasarch.akash.model.DeploymentLease;
 import org.quasarch.akash.model.OperationFailure;
+import org.quasarch.akash.model.remote.Deployment;
 
 import java.nio.file.Path;
 
@@ -50,18 +51,38 @@ public interface Akash {
      * @param page               page number, 0 based index. Defaults to 0
      * @param resultPerPage      how many results per page. max is ??. Default to 10
      * @param deploymentSequence Deployment sequence number
-     * @return Either {@link OperationFailure} or - if successful - {@link AkashPage< Deployment >}
+     * @return Either {@link OperationFailure} or - if successful - {@link PagedResponse< Deployment >}
      * @implSpec Request through REST.
      */
-    Either<OperationFailure, AkashPage<Deployment>> listDeployments(@Nullable Short page,
+    Either<OperationFailure, PagedResponse<Deployment>> listDeployments(@Nullable Short page,
                                                                         @Nullable Short resultPerPage,
                                                                         String deploymentSequence);
 
     /**
-     * @param deploymentSequence Deployment sequence number
+     * List all the deployment for given ( optional ) filters.
+     * Clients should know that the returned iterable might need to fetch more data from upstream.
+     *
+     * @param owner              The owner to filter for
+     * @param state              Filter for deployments in state.
+     * @param deploymentSequence Deployment sequence number. This is a filter, not required
      * @return Either {@link OperationFailure} or - if successful - {@link Iterable< Deployment >}
+     *
      */
-    Either<OperationFailure, Iterable<Deployment>> listDeployments(String deploymentSequence);
+    Either<OperationFailure, Iterable<Deployment>> listDeployments(
+            @Nullable String owner,
+            @Nullable String state,
+            @Nullable String deploymentSequence);
+
+    /**
+     * Lists deployments that will have "me" as an owner. The "me" is the currently configured account address.
+     *
+     * @param owner
+     * @param deploymentSequence
+     * @return
+     */
+    Either<OperationFailure, Iterable<Deployment>> listMyDeployments(
+            String state,
+            String deploymentSequence);
 
     /**
      * Fetches deployment info for the given deployment id
@@ -81,10 +102,10 @@ public interface Akash {
      * @param oSeq               ??
      * @param providerId         identification of the provider
      * @param state              ??
-     * @return A failure represented by {@link OperationFailure} or an {@link AkashPage<Bid>}
+     * @return A failure represented by {@link OperationFailure} or an {@link PagedResponse<Bid>}
      * @implSpec Request through REST.
      */
-    Either<OperationFailure, AkashPage<Bid>> listBids(String deploymentSequence, String groupSequence,
+    Either<OperationFailure, PagedResponse<Bid>> listBids(String deploymentSequence, String groupSequence,
                                                       String oSeq, String providerId, String state,
                                                       short page, short resultsPerPage);
 
@@ -100,7 +121,6 @@ public interface Akash {
      * @param state              ??
      * @return Either {@link OperationFailure} or - if successful - an {@link Iterable<Bid>}
      * @implSpec Request through REST.
-     *
      */
     Either<OperationFailure, Iterable<Bid>> listBids(String deploymentSequence, String groupSequence,
                                                      String oSeq, String providerId, String state);

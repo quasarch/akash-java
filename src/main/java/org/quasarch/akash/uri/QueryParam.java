@@ -1,6 +1,7 @@
 package org.quasarch.akash.uri;
 
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 /**
@@ -13,6 +14,11 @@ import java.nio.charset.StandardCharsets;
 public record QueryParam(String name, String value) {
 
     String escaped() {
-        return URLEncoder.encode(name + "=" + value, StandardCharsets.UTF_8);
+        //return URLEncoder.encode(name + "=" + value, StandardCharsets.UTF_8);
+        return name + "=" + value;
+    }
+
+    boolean hasValue() {
+        return value != null;
     }
 }

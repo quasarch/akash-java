@@ -1,26 +1,26 @@
-package org.quasarch.akash.model;
+package org.quasarch.akash.model.remote;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
 
-/**
- * POJO for Deployment information.
- */
 public record Deployment(
         DeploymentInfo deployment,
         Collection<Group> groups,
-        EscrowAccount escrow_account
+        @JsonProperty("escrow_account")
+        EscrowAccount escrowAccount
 ) {
-
     public record DeploymentInfo(
             @JsonProperty("deployment_id")
             DeploymentId deploymentId,
             String state,
             String version,
+            // todo what is created_at? Is this block height? What does this format represent?
+            // is this a sequence?
             @JsonProperty("created_at")
-            Date createdAt) {
+            String createdAt) {
     }
 
     public record Attribute(String key,
@@ -76,8 +76,10 @@ public record Deployment(
             String state,
             @JsonProperty("group_spec")
             GroupSpec groupSpec,
+            // todo what is created_at? Is this block height? What does this format represent?
+            // is this a sequence?
             @JsonProperty("created_at")
-            LocalDate createdAt
+            String createdAt
     ) {
     }
 
@@ -162,7 +164,3 @@ public record Deployment(
     }
 
 }
-
-
-
-

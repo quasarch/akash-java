@@ -42,3 +42,51 @@ this [https://github.com/akash-network/community/blob/main/sig-clients/client-li
 ## json format on deployments
 There's a "resources" inside of resources
 https://akash.c29r3.xyz/api/swagger/#/Query/Deployments
+
+# temp - error reference 
+Error model
+From the current akash SDK, those are the expected errors:
+
+| Error                      | Code   | Description                                                                               | Should Retry | Mapped to                |
+|----------------------------|--------|-------------------------------------------------------------------------------------------|--------------|--------------------------|
+| errInternal                | 1      | Internal - not supposed to happen                                                         | Yes          | AkashNetworkError        |
+| ErrTxDecode                | 2      | tx parse error                                                                            | Yes          | AkashNetworkError        |
+| ErrInvalidSequence         | 3      | invalid sequence                                                                          | Yes          | ?? what is a sequence ?? |
+| ErrUnauthorized            | 4      | unauthorized                                                                              | No           | AuthError                |
+| ErrInsufficientFunds       | 5      | Not enough funds                                                                          | No           | StateError               |
+| ErrUnknownRequest          | 6      | unkown request                                                                            | No           | BadRequest               |
+| RootCodespace              | 7      | invalid address                                                                           | No           | BadRequest               |
+| ErrInvalidPubKey           | 8      | invalid pubkey                                                                            | No           | BadRequest               |
+| ErrUnknownAddress          | 9      | unknown address                                                                           | No           | BadRequest               |
+| ErrInvalidCoins            | 10     | invalid coins                                                                             | No           | BadRequest               |
+| ErrOutOfGas                | 11     | out of gas                                                                                | No           | StateError               |
+| ErrMemoTooLarge            | 12     | memo too large                                                                            | No           | BadRequest               |
+| ErrInsufficientFee         | 13     | insufficient fee                                                                          | No           | StateError               |
+| ErrTooManySignatures       | 14     | maximum number of signatures exceeded                                                     | No           | ??                       |
+| ErrNoSignatures            | 15     | no signatures supplied                                                                    | No           | BadRequest               |
+| ErrJSONMarshal             | 16     | failed to marshal JSON bytes                                                              | No           | BadRequest               |
+| ErrJSONUnmarshal           | 17     | failed to unmarshal JSON bytes                                                            | No           | BadRequest               |
+| ErrInvalidRequest          | 18     | invalid request                                                                           | No           | BadRequest               |
+| ErrTxInMempoolCache        | 19     | tx already in mempool                                                                     | No           | BadRequest               |
+| ErrMempoolIsFull           | 20     | mempool is full                                                                           | Yes!         | AkashNetworkError        |
+| ErrTxTooLarge              | 21     | tx too large                                                                              | No           | BadRequest               |
+| ErrKeyNotFound             | 22     | key not found                                                                             | No           | BadRequest               |
+| ErrWrongPassword           | 23     | invalid account password                                                                  | No           | AuthError                |
+| ErrorInvalidSigner         | 24     | tx intended signer does not match the given signer                                        | No           | BadRequest               |
+| ErrorInvalidGasAdjustment  | 25     | invalid gas adjustment                                                                    | No           | StateError               |
+| ErrInvalidHeight           | 26     | -- Retry: The message itself doesnt need modification but the header needs to be resigned | No           | BadRequest ??            |
+| ErrInvalidVersion          | 27     | invalid version                                                                           | No           | BadRequest               |
+| ErrInvalidChainID          | 28     | invalid chain-id                                                                          | No           | BadRequest               |
+| ErrInvalidType             | 29     | invalid type                                                                              | No           | BadRequest               |
+| ErrTxTimeoutHeight         | 30     | tx timeout height                                                                         | No           | BadRequest               |
+| ErrUnknownExtensionOptions | 31     | Unknown extension options                                                                 | No           | BadRequest               |
+| ErrWrongSequence           | 32     | incorrect account sequence                                                                | No           | BadRequest               |
+| ErrPackAny                 | 33     | failed packing protobuf message to Any                                                    | No           | BadRequest               |
+| ErrUnpackAny               | 34     | failed unpacking protobuf message from Any                                                | No           | BadRequest               |
+| ErrLogic                   | 35     | internal logic error                                                                      | No           | AkashNetworkError        |
+| ErrConflict                | 36     | conflict                                                                                  | Yes ??       | BadRequest               |
+| ErrNotSupported            | 37     | feature not supported                                                                     | No           | BadRequest               |
+| ErrNotFound                | 38     | not found                                                                                 | No           | BadRequest               |
+| ErrIO                      | 39     | Internal IO error                                                                         | Yes          | AkashNetworkError        |
+| ErrAppConfig               | 40     | error in app.toml                                                                         | ??           | ??                       |
+| ErrPanic                   | 111222 | panic                                                                                     | Yes          | AkashNetworkError        |
