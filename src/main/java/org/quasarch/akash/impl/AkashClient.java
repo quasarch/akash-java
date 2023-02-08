@@ -9,7 +9,6 @@ import org.quasarch.akash.model.AkashPagedResponse;
 import org.quasarch.akash.model.Bid;
 import org.quasarch.akash.model.DeploymentLease;
 import org.quasarch.akash.model.OperationFailure;
-import org.quasarch.akash.model.PagedResponse;
 import org.quasarch.akash.model.remote.Deployment;
 import org.quasarch.akash.model.remote.ListDeploymentsResponse;
 import org.quasarch.akash.uri.QueryParam;
@@ -36,17 +35,17 @@ public final class AkashClient implements Akash {
     private final URI baseUri;
     private final Supplier<HttpClient> httpClientSupplier;
     private static final Logger log = LoggerFactory.getLogger(AkashClient.class);
-    private static final String baseUriEnvVariableKey = "QUASARCH_AKASH_BASE_URI";
+    private static final String BASE_URI_ENV_VARIABLE_KEY = "QUASARCH_AKASH_BASE_URI";
 
     /**
      * Uses QUASARCH_AKASH_BASE_URI env variable to get baseUri address
      *
-     * @param accountAddress
+     * @param accountAddress address to be used when required.
      */
     public AkashClient(String accountAddress) {
-        var baseUri = System.getenv(baseUriEnvVariableKey);
-        Objects.requireNonNull(baseUri);
-        this.baseUri = URI.create(baseUri);
+        var envBaseUri = System.getenv(BASE_URI_ENV_VARIABLE_KEY);
+        Objects.requireNonNull(envBaseUri);
+        this.baseUri = URI.create(envBaseUri);
         this.accountAddress = accountAddress;
         // reuse same http client instance
         final var httpClient = HttpClient.newHttpClient();
@@ -70,17 +69,39 @@ public final class AkashClient implements Akash {
         return null;
     }
 
+
     @Override
-    public Either<OperationFailure, PagedResponse<Deployment>> listDeployments(Short page,
-                                                                               Short resultPerPage,
-                                                                               String deploymentSequence) {
-        Objects.requireNonNull(deploymentSequence, "deploymentSequence cannot be empty on listDeployments");
-        defaultsTo(page, () -> 0L);
-        defaultsTo(resultPerPage, () -> 10L);
+    public Either<OperationFailure, Iterable<Deployment>> listDeployments(
+            String owner,
+            String state,
+            String deploymentSequence
+    ) {
+
+        // ignore pagination, we didnt ask for it
+        return listDeployments(owner, state, deploymentSequence, null)
+                .map(firstPage -> new AkashPagedIterable<>(
+                        nextToken -> listDeployments(owner, state, deploymentSequence, nextToken).get(),
+                        firstPage));
 
 
+    }
+
+
+    @Override
+    public Either<OperationFailure, Deployment> getDeployment(String owner, String dSeq) {
         return null;
     }
+
+    @Override
+    public Either<OperationFailure, Iterable<Bid>> listBids(String deploymentSequence, String groupSequence, String oSeq, String providerId, String state) {
+        return null;
+    }
+
+    @Override
+    public Either<OperationFailure, DeploymentLease> getLease(String deploymentSequence, String groupSequence, String oSeq) {
+        return null;
+    }
+
 
     private Either<OperationFailure, AkashPagedResponse<Deployment>> listDeployments(
             String owner,
@@ -94,11 +115,10 @@ public final class AkashClient implements Akash {
                 deploymentSequence);
 
         var requestUri = addQueryParameters(
-                URI.create(baseUri + listDeploymentUri),
+                URI.create(baseUri + DEPLOYMENT_LIST_URI),
                 new QueryParam("filters.owner", owner),
                 new QueryParam("filters.dseq", deploymentSequence),
-                // TODO what is state?
-                new QueryParam("filters.state", null),
+                new QueryParam("filters.state", state),
                 new QueryParam("pagination.key", nextPageKey)
         );
         log.debug("using {} path to list deployments", requestUri);
@@ -114,50 +134,8 @@ public final class AkashClient implements Akash {
                 .thenApply(HttpResponse::body)
                 .thenApply(AkashClient::fromBody);
 
-        // ignore pagination, we didnt ask for it
         return getEither(bodyFuture);
 
-    }
-
-    @Override
-    public Either<OperationFailure, Iterable<Deployment>> listDeployments(
-            String owner,
-            String state,
-            String deploymentSequence
-    ) {
-
-        // ignore pagination, we didnt ask for it
-        return listDeployments(owner, state, deploymentSequence, null)
-                .map(firstPage -> new AkashPagedIterable<>(
-                        (nextToken) -> listDeployments(owner, state, deploymentSequence, nextToken).get(),
-                        firstPage));
-
-
-    }
-
-    @Override
-    public Either<OperationFailure, Iterable<Deployment>> listMyDeployments(String state, String deploymentSequence) {
-        return listDeployments(accountAddress, state, deploymentSequence);
-    }
-
-    @Override
-    public Either<OperationFailure, Deployment> getDeployment(String owner, String dSeq) {
-        return null;
-    }
-
-    @Override
-    public Either<OperationFailure, PagedResponse<Bid>> listBids(String deploymentSequence, String groupSequence, String oSeq, String providerId, String state, short page, short resultsPerPage) {
-        return null;
-    }
-
-    @Override
-    public Either<OperationFailure, Iterable<Bid>> listBids(String deploymentSequence, String groupSequence, String oSeq, String providerId, String state) {
-        return null;
-    }
-
-    @Override
-    public Either<OperationFailure, DeploymentLease> getLease(String deploymentSequence, String groupSequence, String oSeq) {
-        return null;
     }
 
     private static <T> void defaultsTo(T instance, Supplier<T> defaultOnNull) {
@@ -168,7 +146,7 @@ public final class AkashClient implements Akash {
     private static Either<OperationFailure, AkashPagedResponse<Deployment>> fromBody(String body) {
         ObjectMapper objectMapper = new ObjectMapper();
         // todo move this jackson specifics to global place
-        //objectMapper.registerModule(new JavaTimeModule());
+        // objectMapper.registerModule(new JavaTimeModule());
         try {
             log.trace("received response string: {}", body);
             var deploymentResponse = objectMapper.readValue(body, ListDeploymentsResponse.class);
@@ -184,9 +162,10 @@ public final class AkashClient implements Akash {
         try {
             return future.get();
         } catch (ExecutionException | InterruptedException ex) {
+            Thread.currentThread().interrupt();
             return Either.left(OperationFailure.from(ex));
         }
     }
 
-    private final static String listDeploymentUri = "/api/akash/deployment/v1beta2/deployments/list";
+    private static final String DEPLOYMENT_LIST_URI = "/api/akash/deployment/v1beta2/deployments/list";
 }

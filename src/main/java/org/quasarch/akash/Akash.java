@@ -47,16 +47,18 @@ public interface Akash {
 
     /**
      * List all deployments matching the filters with consideration for page limits.
+     * Not implemented: This might not be needed at all since listDeployments() support pagination
+     * using {@link org.quasarch.akash.impl.pagination.AkashPagedIterable}.
+     * Kept for future iterations
      *
      * @param page               page number, 0 based index. Defaults to 0
      * @param resultPerPage      how many results per page. max is ??. Default to 10
      * @param deploymentSequence Deployment sequence number
      * @return Either {@link OperationFailure} or - if successful - {@link PagedResponse< Deployment >}
      * @implSpec Request through REST.
-     */
     Either<OperationFailure, PagedResponse<Deployment>> listDeployments(@Nullable Short page,
-                                                                        @Nullable Short resultPerPage,
-                                                                        String deploymentSequence);
+     @Nullable Short resultPerPage,
+     String deploymentSequence);*/
 
     /**
      * List all the deployment for given ( optional ) filters.
@@ -66,23 +68,12 @@ public interface Akash {
      * @param state              Filter for deployments in state.
      * @param deploymentSequence Deployment sequence number. This is a filter, not required
      * @return Either {@link OperationFailure} or - if successful - {@link Iterable< Deployment >}
-     *
      */
     Either<OperationFailure, Iterable<Deployment>> listDeployments(
             @Nullable String owner,
             @Nullable String state,
             @Nullable String deploymentSequence);
 
-    /**
-     * Lists deployments that will have "me" as an owner. The "me" is the currently configured account address.
-     *
-     * @param owner
-     * @param deploymentSequence
-     * @return
-     */
-    Either<OperationFailure, Iterable<Deployment>> listMyDeployments(
-            String state,
-            String deploymentSequence);
 
     /**
      * Fetches deployment info for the given deployment id
@@ -96,7 +87,9 @@ public interface Akash {
 
     /**
      * Get the list of bids based on a set of filters.
-     *
+     * Not implemented: This might not be needed at all since listDeployments() support pagination
+     *      * using {@link org.quasarch.akash.impl.pagination.AkashPagedIterable}.
+     *      * Kept for future iterations
      * @param deploymentSequence
      * @param groupSequence      0 to x
      * @param oSeq               ??
@@ -104,10 +97,11 @@ public interface Akash {
      * @param state              ??
      * @return A failure represented by {@link OperationFailure} or an {@link PagedResponse<Bid>}
      * @implSpec Request through REST.
-     */
+
     Either<OperationFailure, PagedResponse<Bid>> listBids(String deploymentSequence, String groupSequence,
-                                                      String oSeq, String providerId, String state,
-                                                      short page, short resultsPerPage);
+    String oSeq, String providerId, String state,
+    short page, short resultsPerPage);
+     */
 
     /**
      * Get the list of bids based on a set of filters.

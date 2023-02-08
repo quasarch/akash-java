@@ -17,10 +17,10 @@ public record Deployment(
             DeploymentId deploymentId,
             String state,
             String version,
-            // todo what is created_at? Is this block height? What does this format represent?
+
             // is this a sequence?
             @JsonProperty("created_at")
-            String createdAt) {
+            String createdAtBlockHeight) {
     }
 
     public record Attribute(String key,
@@ -79,7 +79,7 @@ public record Deployment(
             // todo what is created_at? Is this block height? What does this format represent?
             // is this a sequence?
             @JsonProperty("created_at")
-            String createdAt
+            String createdAtBlockHeight
     ) {
     }
 
