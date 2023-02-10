@@ -24,7 +24,7 @@ import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
 
 /**
- * Unit test for {@link AkashClient} implementation
+ * test for {@link AkashClient} implementation
  */
 
 @ExtendWith({MockitoExtension.class, MockServerExtension.class})
@@ -62,9 +62,9 @@ class AkashClientTest {
      */
     @Test
     void listDeployments() throws IOException {
-        /*var instance = new AkashClient("some-address", URI.create("http://localhost:" + client.getPort()), HttpClient::newHttpClient);*/
-        var instance = new AkashClient("some-address",
-                URI.create("https://akash.c29r3.xyz"), HttpClient::newHttpClient);
+        var instance = new AkashClient("some-address", URI.create("http://localhost:" + client.getPort()), HttpClient::newHttpClient);
+       /* var instance = new AkashClient("some-address",
+                URI.create("https://akash.c29r3.xyz"), HttpClient::newHttpClient);*/
         var response = Files.readString(Path.of("src/test/resources/responses/listDeployments-6-returns.json"));
         client.when(
                 request()
@@ -96,7 +96,23 @@ class AkashClientTest {
     }
 
     @Test
-    void listDeploymentsShouldThrowOnEmpty() {
+    void listDeploymentsShouldMapHttpErrorsToFailure() throws IOException {
+        var instance = new AkashClient("some-address", URI.create("http://localhost:" + client.getPort()), HttpClient::newHttpClient);
+        var response = Files.readString(Path.of("src/test/resources/responses/listDeployments-error.json"));
+        client.when(
+                request()
+                        .withMethod("GET")
+                        .withPath(""), Times.exactly(1)
+        ).respond(
+                response()
+                        .withStatusCode(400)
+                        .withBody(response)
+        );
+        var result = instance.listDeployments("",null,null);
+
+        assertEquals("3 invalid URL escape \"%%%\"", result.getLeft().failureMessage());
+
+
 
     }
 

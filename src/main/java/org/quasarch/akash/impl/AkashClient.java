@@ -1,10 +1,10 @@
 package org.quasarch.akash.impl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.vavr.control.Either;
 import org.quasarch.akash.Akash;
 import org.quasarch.akash.impl.pagination.AkashPagedIterable;
+import org.quasarch.akash.impl.parsing.ResponseParserBuilder;
+import org.quasarch.akash.impl.parsing.ResponseParserWithTransformation;
 import org.quasarch.akash.model.AkashPagedResponse;
 import org.quasarch.akash.model.Bid;
 import org.quasarch.akash.model.DeploymentLease;
@@ -77,6 +77,7 @@ public final class AkashClient implements Akash {
             String deploymentSequence
     ) {
 
+
         // ignore pagination, we didnt ask for it
         return listDeployments(owner, state, deploymentSequence, null)
                 .map(firstPage -> new AkashPagedIterable<>(
@@ -129,33 +130,27 @@ public final class AkashClient implements Akash {
                 .GET()
                 .build();
 
+        var responseParser = ResponseParserBuilder
+                .<AkashPagedResponse<Deployment>, ListDeploymentsResponse>newBuilder()
+                .withResultClass(ListDeploymentsResponse.class)
+                .withIntermediateOperation(
+                        intermediate -> new AkashPagedResponse<>(intermediate.deployments(),
+                                intermediate.pagination())
+                )
+                .build();
+
         var bodyFuture = httpClientSupplier.get()
                 .sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                .thenApply(HttpResponse::body)
-                .thenApply(AkashClient::fromBody);
+                .thenApply(responseParser::parseToEither);
 
         return getEither(bodyFuture);
 
     }
 
+
     private static <T> void defaultsTo(T instance, Supplier<T> defaultOnNull) {
         if (instance == null)
             instance = defaultOnNull.get();
-    }
-
-    private static Either<OperationFailure, AkashPagedResponse<Deployment>> fromBody(String body) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        // todo move this jackson specifics to global place
-        // objectMapper.registerModule(new JavaTimeModule());
-        try {
-            log.trace("received response string: {}", body);
-            var deploymentResponse = objectMapper.readValue(body, ListDeploymentsResponse.class);
-
-            return Either.right(new AkashPagedResponse<>(deploymentResponse.deployments(),
-                    deploymentResponse.pagination()));
-        } catch (JsonProcessingException jsonEx) {
-            return Either.left(OperationFailure.from(jsonEx));
-        }
     }
 
     private static <T> Either<OperationFailure, T> getEither(CompletableFuture<Either<OperationFailure, T>> future) {
@@ -168,4 +163,6 @@ public final class AkashClient implements Akash {
     }
 
     private static final String DEPLOYMENT_LIST_URI = "/api/akash/deployment/v1beta2/deployments/list";
+
+
 }
