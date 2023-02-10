@@ -117,11 +117,29 @@ class AkashClientTest {
     }
 
     @Test
-    void testListDeployments() {
-    }
+    void getDeployment() throws IOException {
+        var instance = new AkashClient("some-address", URI.create("http://localhost:" + client.getPort()), HttpClient::newHttpClient);
 
-    @Test
-    void getDeployment() {
+        var response = Files.readString(Path.of("src/test/resources/responses/info-deployment-ok-return.json"));
+        client.when(
+                request()
+                        .withMethod("GET")
+                        .withPath(""), Times.exactly(1)
+        ).respond(
+                response()
+                        .withStatusCode(200)
+                        .withBody(response)
+        );
+
+        var result = instance.getDeployment("akash1qqzwc5d7hynl67nsmn9jukvwqp3vzdl6j2t7lk", "dseq");
+        if (result.isLeft()) {
+            fail("error was " + result.getLeft());
+            return;
+        }
+        // happy path
+        assertFalse(result.isLeft());
+
+
     }
 
     @Test

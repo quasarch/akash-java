@@ -4,7 +4,6 @@ import io.vavr.control.Either;
 import org.quasarch.akash.Akash;
 import org.quasarch.akash.impl.pagination.AkashPagedIterable;
 import org.quasarch.akash.impl.parsing.ResponseParserBuilder;
-import org.quasarch.akash.impl.parsing.ResponseParserWithTransformation;
 import org.quasarch.akash.model.AkashPagedResponse;
 import org.quasarch.akash.model.Bid;
 import org.quasarch.akash.model.DeploymentLease;
@@ -76,21 +75,50 @@ public final class AkashClient implements Akash {
             String state,
             String deploymentSequence
     ) {
-
-
-        // ignore pagination, we didnt ask for it
         return listDeployments(owner, state, deploymentSequence, null)
                 .map(firstPage -> new AkashPagedIterable<>(
                         nextToken -> listDeployments(owner, state, deploymentSequence, nextToken).get(),
                         firstPage));
-
-
     }
 
 
+    /**
+     * @param owner              ??
+     * @param deploymentSequence ??
+     * @return
+     * @see Akash#getDeployment(String, String)
+     */
     @Override
-    public Either<OperationFailure, Deployment> getDeployment(String owner, String dSeq) {
-        return null;
+    public Either<OperationFailure, Deployment> getDeployment(String owner, String deploymentSequence) {
+        log.debug("getDeployment called for owner {} and deploymentSequence {}",
+                owner,
+                deploymentSequence);
+        Objects.requireNonNull(owner);
+        Objects.requireNonNull(deploymentSequence);
+
+        var requestUri = addQueryParameters(
+                URI.create(baseUri + DEPLOYMENT_GET_URI),
+                new QueryParam("id.owner", owner),
+                new QueryParam("id.dseq", deploymentSequence)
+        );
+        log.debug("using {} path to get deployment", requestUri);
+
+        var request = HttpRequest
+                .newBuilder(requestUri)
+                .GET()
+                .build();
+
+        var responseParser = ResponseParserBuilder
+                .<Deployment, Deployment>newBuilder()
+                .withResultClass(Deployment.class)
+                .build();
+
+        var bodyFuture = httpClientSupplier.get()
+                .sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(responseParser::parseToEither);
+
+        return extractEither(bodyFuture);
+
     }
 
     @Override
@@ -143,7 +171,7 @@ public final class AkashClient implements Akash {
                 .sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(responseParser::parseToEither);
 
-        return getEither(bodyFuture);
+        return extractEither(bodyFuture);
 
     }
 
@@ -153,7 +181,7 @@ public final class AkashClient implements Akash {
             instance = defaultOnNull.get();
     }
 
-    private static <T> Either<OperationFailure, T> getEither(CompletableFuture<Either<OperationFailure, T>> future) {
+    private static <T> Either<OperationFailure, T> extractEither(CompletableFuture<Either<OperationFailure, T>> future) {
         try {
             return future.get();
         } catch (ExecutionException | InterruptedException ex) {
@@ -163,6 +191,7 @@ public final class AkashClient implements Akash {
     }
 
     private static final String DEPLOYMENT_LIST_URI = "/api/akash/deployment/v1beta2/deployments/list";
+    private static final String DEPLOYMENT_GET_URI = "/api/akash/deployment/v1beta2/deployments/info";
 
 
 }

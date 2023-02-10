@@ -79,14 +79,14 @@ public interface Akash {
 
 
     /**
-     * Fetches deployment info for the given deployment id
+     * Fetches deployment info for the given deployment id.
      *
-     * @param owner ??
-     * @param dSeq  ??
+     * @param owner owner, mandatory
+     * @param deploymentSequence Deployment sequence, mandatory
      * @return Either {@link OperationFailure} or - if successful - {@link Deployment}
      * @implSpec Request through REST.
      */
-    Either<OperationFailure, Deployment> getDeployment(String owner, String dSeq);
+    Either<OperationFailure, Deployment> getDeployment(String owner, String deploymentSequence);
 
     /**
      * Get the list of bids based on a set of filters.
