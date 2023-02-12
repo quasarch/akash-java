@@ -79,10 +79,34 @@ public final class AkashClient implements Akash {
             String state,
             String deploymentSequence
     ) {
-        return listDeployments(owner, state, deploymentSequence, null)
-                .map(firstPage -> new AkashPagedIterable<>(
-                        nextToken -> listDeployments(owner, state, deploymentSequence, nextToken).get(),
-                        firstPage));
+
+        log.debug("listDeployments called for owner {}, state {} and deploymentSequence {}",
+                owner,
+                state,
+                deploymentSequence);
+
+        var requestUri = addQueryParameters(
+                URI.create(baseUri + DEPLOYMENT_LIST_URI),
+                new QueryParam("filters.owner", owner),
+                new QueryParam("filters.dseq", deploymentSequence),
+                new QueryParam("filters.state", state)
+        );
+        log.debug("using {} path to list deployments", requestUri);
+        var responseParser = ResponseParserBuilder
+                .<AkashPagedResponse<Deployment>, ListDeploymentsResponse>newBuilder()
+                .withResultClass(ListDeploymentsResponse.class)
+                .withIntermediateOperation(
+                        intermediate -> new AkashPagedResponse<>(intermediate.deployments(),
+                                intermediate.pagination())
+                )
+                .build();
+        return listRequest(requestUri, responseParser).map(fPage -> new AkashPagedIterable<>(
+                nextPage -> listRequest(addQueryParameters(requestUri,
+                        new QueryParam("pagination.key", nextPage)
+                ), responseParser).get(),
+                fPage
+        ));
+
     }
 
 
@@ -172,8 +196,52 @@ public final class AkashClient implements Akash {
     }
 
     @Override
-    public Either<OperationFailure, DeploymentLease> getLease(String deploymentSequence, String groupSequence, String oSeq) {
-        return null;
+    public Either<OperationFailure, DeploymentLease> getLease(
+            String owner,
+            String deploymentSequence,
+            String groupSequence,
+            String oSeq,
+            String provider
+    ) {
+        log.debug("getLease called for owner {} " +
+                        "deploymentSequence {} " +
+                        "groupSequence {} " +
+                        "oSeq {}" +
+                        "and provider {}",
+                owner,
+                deploymentSequence,
+                groupSequence,
+                oSeq,
+                provider);
+        Objects.requireNonNull(owner);
+        Objects.requireNonNull(deploymentSequence);
+        Objects.requireNonNull(groupSequence);
+        Objects.requireNonNull(oSeq);
+        Objects.requireNonNull(provider);
+
+        // TODO HERE
+        var requestUri = addQueryParameters(
+                URI.create(baseUri + DEPLOYMENT_GET_URI),
+                new QueryParam("id.owner", owner),
+                new QueryParam("id.dseq", deploymentSequence)
+        );
+        log.debug("using {} path to get deployment", requestUri);
+
+        var request = HttpRequest
+                .newBuilder(requestUri)
+                .GET()
+                .build();
+
+        var responseParser = ResponseParserBuilder
+                .<Deployment, Deployment>newBuilder()
+                .withResultClass(Deployment.class)
+                .build();
+
+        var bodyFuture = httpClientSupplier.get()
+                .sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(responseParser::parseToEither);
+
+        return extractEither(bodyFuture);
     }
 
     /**
@@ -200,37 +268,6 @@ public final class AkashClient implements Akash {
                 .thenApply(responseParser::parseToEither);
 
         return extractEither(bodyFuture);
-    }
-
-
-    private Either<OperationFailure, AkashPagedResponse<Deployment>> listDeployments(
-            String owner,
-            String state,
-            String deploymentSequence,
-            String nextPageKey
-    ) {
-        log.debug("listDeployments called for owner {}, state {} and deploymentSequence {}",
-                owner,
-                state,
-                deploymentSequence);
-
-        var requestUri = addQueryParameters(
-                URI.create(baseUri + DEPLOYMENT_LIST_URI),
-                new QueryParam("filters.owner", owner),
-                new QueryParam("filters.dseq", deploymentSequence),
-                new QueryParam("filters.state", state),
-                new QueryParam("pagination.key", nextPageKey)
-        );
-        log.debug("using {} path to list deployments", requestUri);
-        var responseParser = ResponseParserBuilder
-                .<AkashPagedResponse<Deployment>, ListDeploymentsResponse>newBuilder()
-                .withResultClass(ListDeploymentsResponse.class)
-                .withIntermediateOperation(
-                        intermediate -> new AkashPagedResponse<>(intermediate.deployments(),
-                                intermediate.pagination())
-                )
-                .build();
-        return listRequest(requestUri, responseParser);
     }
 
 

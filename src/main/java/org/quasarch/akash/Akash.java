@@ -132,9 +132,13 @@ public interface Akash {
      * @param oSeq               ??
      * @return Either {@link OperationFailure} or - if successful - {@link DeploymentLease}
      */
-    Either<OperationFailure, DeploymentLease> getLease(String deploymentSequence,
-                                                       String groupSequence,
-                                                       String oSeq);
+    Either<OperationFailure, DeploymentLease> getLease(
+            String owner,
+            String deploymentSequence,
+            String groupSequence,
+            String oSeq,
+            String provider
+    );
 
     /**
      *
