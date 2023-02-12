@@ -8,15 +8,19 @@ import java.util.stream.Stream;
 public class UriUtils {
 
     public static URI addQueryParameters(URI basePath, QueryParam... params) {
+
+        final boolean hasQueryAlready = basePath.getQuery() != null && !basePath.getQuery().isEmpty();
         var querySection = Stream
                 .of(params)
                 .filter(QueryParam::hasValue)
-                .reduce(new StringBuilder("?"),
+                .collect(() -> new StringBuilder(hasQueryAlready ? basePath.getQuery() + "&" : ""),
                         (result, param) -> result.append(param.escaped()).append("&"), StringBuilder::append)
                 .toString();
+        querySection = querySection.substring(0, querySection.length() - 1);
+
 
         return basePath.resolve(
-                basePath.getPath() + querySection
+                basePath.getPath() + "?" + querySection
         );
     }
 }

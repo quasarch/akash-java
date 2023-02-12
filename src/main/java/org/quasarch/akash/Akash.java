@@ -3,7 +3,7 @@ package org.quasarch.akash;
 import io.vavr.control.Either;
 import org.jetbrains.annotations.Nullable;
 import org.quasarch.akash.model.PagedResponse;
-import org.quasarch.akash.model.Bid;
+import org.quasarch.akash.model.remote.Bid;
 
 import org.quasarch.akash.model.DeploymentLease;
 import org.quasarch.akash.model.OperationFailure;
@@ -75,13 +75,10 @@ public interface Akash {
             @Nullable String deploymentSequence);
 
 
-
-
-
     /**
      * Fetches deployment info for the given deployment id.
      *
-     * @param owner owner, mandatory
+     * @param owner              owner, mandatory
      * @param deploymentSequence Deployment sequence, mandatory
      * @return Either {@link OperationFailure} or - if successful - {@link Deployment}
      * @implSpec Request through REST.
@@ -119,8 +116,13 @@ public interface Akash {
      * @return Either {@link OperationFailure} or - if successful - an {@link Iterable<Bid>}
      * @implSpec Request through REST.
      */
-    Either<OperationFailure, Iterable<Bid>> listBids(String deploymentSequence, String groupSequence,
-                                                     String oSeq, String providerId, String state);
+    Either<OperationFailure, Iterable<Bid>> listBids(
+            @Nullable String owner,
+            @Nullable String deploymentSequence,
+            @Nullable String groupSequence,
+            @Nullable String oSeq,
+            @Nullable String providerId,
+            @Nullable String state);
 
     /**
      * Get lease	Get information regarding a lease such as its status.

@@ -1,14 +1,17 @@
 package org.quasarch.akash.impl;
 
 import io.vavr.control.Either;
+import org.jetbrains.annotations.Nullable;
 import org.quasarch.akash.Akash;
 import org.quasarch.akash.impl.pagination.AkashPagedIterable;
+import org.quasarch.akash.impl.parsing.ResponseParser;
 import org.quasarch.akash.impl.parsing.ResponseParserBuilder;
 import org.quasarch.akash.model.AkashPagedResponse;
-import org.quasarch.akash.model.Bid;
+import org.quasarch.akash.model.remote.Bid;
 import org.quasarch.akash.model.DeploymentLease;
 import org.quasarch.akash.model.OperationFailure;
 import org.quasarch.akash.model.remote.Deployment;
+import org.quasarch.akash.model.remote.ListBidResponse;
 import org.quasarch.akash.model.remote.ListDeploymentsResponse;
 import org.quasarch.akash.uri.QueryParam;
 import org.slf4j.Logger;
@@ -123,13 +126,80 @@ public final class AkashClient implements Akash {
     }
 
     @Override
-    public Either<OperationFailure, Iterable<Bid>> listBids(String deploymentSequence, String groupSequence, String oSeq, String providerId, String state) {
-        return null;
+    public Either<OperationFailure, Iterable<Bid>> listBids(
+            @Nullable String owner,
+            @Nullable String deploymentSequence,
+            @Nullable String groupSequence,
+            @Nullable String oSeq,
+            @Nullable String providerId,
+            @Nullable String state) {
+        log.debug("listBids called with filters:  " +
+                        "owner {}, deploymentSequence {}, groupSequence {} and oSeq {}" +
+                        "providerId {}, state {}",
+                deploymentSequence,
+                groupSequence,
+                oSeq,
+                providerId,
+                state);
+
+        var requestUri = addQueryParameters(
+                URI.create(baseUri + BID_LIST_URI),
+                new QueryParam("filters.owner", owner),
+                new QueryParam("filters.dseq", deploymentSequence),
+                new QueryParam("filters.gseq", state),
+                new QueryParam("filters.oseq", state),
+                new QueryParam("filters.provider", state),
+                new QueryParam("filters.state", state)
+                //new QueryParam("pagination.key", nextPageKey)
+        );
+        log.debug("using {} path to list bids", requestUri);
+        var responseParser = ResponseParserBuilder
+                .<AkashPagedResponse<Bid>, ListBidResponse>newBuilder()
+                .withResultClass(ListBidResponse.class)
+                .withIntermediateOperation(
+                        intermediate -> new AkashPagedResponse<>(intermediate.bids(),
+                                intermediate.pagination())
+                )
+                .build();
+        return listRequest(requestUri, responseParser)
+                .map(fPage -> new AkashPagedIterable<>(
+                        nextPage -> listRequest(addQueryParameters(requestUri,
+                                new QueryParam("pagination.key", nextPage)
+                        ), responseParser).get(),
+                        fPage
+                ));
+
     }
 
     @Override
     public Either<OperationFailure, DeploymentLease> getLease(String deploymentSequence, String groupSequence, String oSeq) {
         return null;
+    }
+
+    /**
+     * for internal use
+     * Helps to to a request of / list type
+     *
+     * @param requestUri     uri with query params already added
+     * @param responseParser
+     * @param <T>
+     * @return
+     */
+    private <T> Either<OperationFailure, AkashPagedResponse<T>> listRequest(
+            URI requestUri,
+            ResponseParser<AkashPagedResponse<T>> responseParser
+    ) {
+        log.error("listRequest called for requestUri {}", requestUri);
+        var request = HttpRequest
+                .newBuilder(requestUri)
+                .GET()
+                .build();
+
+        var bodyFuture = httpClientSupplier.get()
+                .sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(responseParser::parseToEither);
+
+        return extractEither(bodyFuture);
     }
 
 
@@ -152,13 +222,6 @@ public final class AkashClient implements Akash {
                 new QueryParam("pagination.key", nextPageKey)
         );
         log.debug("using {} path to list deployments", requestUri);
-
-
-        var request = HttpRequest
-                .newBuilder(requestUri)
-                .GET()
-                .build();
-
         var responseParser = ResponseParserBuilder
                 .<AkashPagedResponse<Deployment>, ListDeploymentsResponse>newBuilder()
                 .withResultClass(ListDeploymentsResponse.class)
@@ -167,13 +230,7 @@ public final class AkashClient implements Akash {
                                 intermediate.pagination())
                 )
                 .build();
-
-        var bodyFuture = httpClientSupplier.get()
-                .sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                .thenApply(responseParser::parseToEither);
-
-        return extractEither(bodyFuture);
-
+        return listRequest(requestUri, responseParser);
     }
 
 
@@ -193,6 +250,7 @@ public final class AkashClient implements Akash {
 
     private static final String DEPLOYMENT_LIST_URI = "/api/akash/deployment/v1beta2/deployments/list";
     private static final String DEPLOYMENT_GET_URI = "/api/akash/deployment/v1beta2/deployments/info";
+    private static final String BID_LIST_URI = "/api/akash/market/v1beta2/bids/list";
 
 
 }

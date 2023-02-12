@@ -70,8 +70,10 @@ class AkashClientTest {
     @Test
     void listDeployments() throws IOException {
         var instance = new AkashClient("some-address", URI.create("http://localhost:" + client.getPort()), HttpClient::newHttpClient);
-       /* var instance = new AkashClient("some-address",
-                URI.create("https://akash.c29r3.xyz"), HttpClient::newHttpClient);*/
+       /*
+        var instance = new AkashClient("some-address",
+        URI.create("https://akash.c29r3.xyz"), HttpClient::newHttpClient);
+        */
         var response = Files.readString(Path.of("src/test/resources/responses/listDeployments-6-returns.json"));
         client.when(
                 request()
@@ -93,13 +95,9 @@ class AkashClientTest {
             count.incrementAndGet();
         });
 
-
         // happy path
         assertFalse(result.isLeft());
-
         // json parsing
-
-
     }
 
     /**
@@ -170,12 +168,75 @@ class AkashClientTest {
     }
 
     @Test
-    void listBids() {
+    void itShouldFollowPaginationOnListBids() throws IOException {
+        var instance = new AkashClient("some-address", URI.create("http://localhost:" + client.getPort()), HttpClient::newHttpClient);
+
+        var response = Files.readString(Path.of("src/test/resources/responses/listBids-ok.json"));
+        client.when(
+                request()
+                        .withMethod("GET")
+                        .withPath(""), Times.exactly(2)
+        ).respond(
+                response()
+                        .withStatusCode(200)
+                        .withBody(response)
+        );
+
+        var result = instance.listBids("akash1qqttharxgy9xjz9a28nlvs5rdhrcdchs2lfj5q", null,
+                null, null, null, null);
+        if (result.isLeft()) {
+            fail("error was " + result.getLeft());
+            return;
+        }
+        // happy path
+        assertFalse(result.isLeft());
+        // json parsing
+        var countBids = StreamSupport
+                .stream(result.get().spliterator(), false)
+                .count();
+        assertEquals(8,countBids);
     }
 
     @Test
-    void testListBids() {
+    void itShouldListBids() throws IOException {
+        var instance = new AkashClient("some-address", URI.create("http://localhost:" + client.getPort()), HttpClient::newHttpClient);
+        /*var instance = new AkashClient("some-address",
+        URI.create("https://akash.c29r3.xyz"), HttpClient::newHttpClient);*/
+
+        var response = Files.readString(Path.of("src/test/resources/responses/listBids-ok.json"));
+        client.when(
+                request()
+                        .withMethod("GET")
+                        .withPath(""), Times.exactly(1)
+        ).respond(
+                response()
+                        .withStatusCode(200)
+                        .withBody(response)
+        );
+
+        var result = instance.listBids("akash1qqttharxgy9xjz9a28nlvs5rdhrcdchs2lfj5q", null,
+                null, null, null, null);
+        if (result.isLeft()) {
+            fail("error was " + result.getLeft());
+            return;
+        }
+        // happy path
+        assertFalse(result.isLeft());
+        // json parsing
+        var firstBid = StreamSupport
+                .stream(result.get().spliterator(), false)
+                .findFirst();
+
+        if (firstBid.isEmpty()) {
+            fail("could not find a single bid result");
+            return;
+        }
+        assertNotNull(firstBid.get().bid().bidId());
+        assertNotNull(firstBid.get().escrowAccount().id());
+
+
     }
+
 
     @Test
     void getLease() {

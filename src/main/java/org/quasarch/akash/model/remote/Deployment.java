@@ -2,9 +2,7 @@ package org.quasarch.akash.model.remote;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Date;
 
 public record Deployment(
         DeploymentInfo deployment,
@@ -102,13 +100,6 @@ public record Deployment(
 
     public record Memory(Quantity quantity,
                          Collection<Attribute> attributes) {
-    }
-
-    public record Price(
-            String denom,
-            String amount
-    ) {
-
     }
 
     public record Quantity(String val) {
