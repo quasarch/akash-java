@@ -24,6 +24,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.function.Supplier;
 
+import static org.quasarch.akash.model.remote.AkashErrorType.ClientError;
 import static org.quasarch.akash.uri.UriUtils.addQueryParameters;
 
 /**
@@ -186,7 +187,7 @@ public final class AkashClient implements Akash {
             return future.get();
         } catch (ExecutionException | InterruptedException ex) {
             Thread.currentThread().interrupt();
-            return Either.left(OperationFailure.from(ex));
+            return Either.left(new OperationFailure(ClientError, ex.getMessage()));
         }
     }
 

@@ -1,15 +1,20 @@
 package org.quasarch.akash.impl;
 
-import io.vavr.collection.Stream;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockserver.client.MockServerClient;
 import org.mockserver.junit.jupiter.MockServerExtension;
 import org.mockserver.matchers.Times;
+import org.quasarch.akash.model.remote.AkashErrorType;
 
 import java.io.IOException;
 import java.net.URI;
@@ -17,6 +22,7 @@ import java.net.http.HttpClient;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -32,6 +38,7 @@ class AkashClientTest {
 
 
     private MockServerClient client;
+
 
     @BeforeEach
     public void beforeEachLifecyleMethod(MockServerClient client) {
@@ -95,6 +102,11 @@ class AkashClientTest {
 
     }
 
+    /**
+     * code 3 should be mapped to BadRequest
+     *
+     * @throws IOException
+     */
     @Test
     void listDeploymentsShouldMapHttpErrorsToFailure() throws IOException {
         var instance = new AkashClient("some-address", URI.create("http://localhost:" + client.getPort()), HttpClient::newHttpClient);
@@ -108,27 +120,30 @@ class AkashClientTest {
                         .withStatusCode(400)
                         .withBody(response)
         );
-        var result = instance.listDeployments("",null,null);
+        var result = instance.listDeployments("", null, null);
 
-        assertEquals("3 invalid URL escape \"%%%\"", result.getLeft().failureMessage());
-
+        assertEquals(AkashErrorType.BadRequest, result.getLeft().errorType());
 
 
     }
 
+    /**
+     * Happy path
+     */
     @Test
     void getDeployment() throws IOException {
         var instance = new AkashClient("some-address", URI.create("http://localhost:" + client.getPort()), HttpClient::newHttpClient);
 
-        var response = Files.readString(Path.of("src/test/resources/responses/info-deployment-ok-return.json"));
+        var responseBody = Files.readString(Path.of("src/test/resources/responses/info-deployment-ok-return.json"));
         client.when(
                 request()
+
                         .withMethod("GET")
                         .withPath(""), Times.exactly(1)
         ).respond(
                 response()
                         .withStatusCode(200)
-                        .withBody(response)
+                        .withBody(responseBody)
         );
 
         var result = instance.getDeployment("akash1qqzwc5d7hynl67nsmn9jukvwqp3vzdl6j2t7lk", "dseq");
@@ -138,7 +153,19 @@ class AkashClientTest {
         }
         // happy path
         assertFalse(result.isLeft());
+        // json parsing sampling
+        var response = result.get();
+        assertEquals("akash1qqzwc5d7hynl67nsmn9jukvwqp3vzdl6j2t7lk", response.deployment().deploymentId().owner());
+        assertEquals("1027706", response.deployment().deploymentId().deploymentSequence());
+        assertEquals("closed", response.escrowAccount().state());
 
+    }
+
+    @ParameterizedTest
+    @MethodSource("getDeploymentShouldFailOnMissingArgumentDataSupplier")
+    void getDeploymentShouldFailOnMissingArgument(String owner, String deploymentSequence) throws IOException {
+        var instance = new AkashClient("some-address", URI.create("http://localhost:" + client.getPort()), HttpClient::newHttpClient);
+        assertThrows(NullPointerException.class, () -> instance.getDeployment(owner, deploymentSequence));
 
     }
 
@@ -154,5 +181,13 @@ class AkashClientTest {
     void getLease() {
     }
 
+
+    public static Stream<Arguments> getDeploymentShouldFailOnMissingArgumentDataSupplier() {
+        return Stream.of(
+                Arguments.of("asd", null),
+                Arguments.of(null, "seq"),
+                Arguments.of(null, null)
+        );
+    }
 
 }
