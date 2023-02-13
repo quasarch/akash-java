@@ -16,6 +16,7 @@ import org.quasarch.akash.model.remote.ListDeploymentsResponse;
 import org.quasarch.akash.uri.QueryParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import shaded_package.joptsimple.internal.Strings;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -130,22 +131,11 @@ public final class AkashClient implements Akash {
                 new QueryParam("id.dseq", deploymentSequence)
         );
         log.debug("using {} path to get deployment", requestUri);
-
-        var request = HttpRequest
-                .newBuilder(requestUri)
-                .GET()
-                .build();
-
         var responseParser = ResponseParserBuilder
                 .<Deployment, Deployment>newBuilder()
                 .withResultClass(Deployment.class)
                 .build();
-
-        var bodyFuture = httpClientSupplier.get()
-                .sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                .thenApply(responseParser::parseToEither);
-
-        return extractEither(bodyFuture);
+        return getRequest(requestUri, responseParser);
 
     }
 
@@ -196,11 +186,52 @@ public final class AkashClient implements Akash {
     }
 
     @Override
+    public Either<OperationFailure, Bid> getBid(String owner, String deploymentSequence,
+                                                @Nullable String groupSequence,
+                                                @Nullable String orderSequence,
+                                                String providerId)
+
+    {
+        log.debug("getBid called for owner {} " +
+                        "deploymentSequence {} " +
+                        "groupSequence {} " +
+                        "orderSequence {}" +
+                        "and providerId {}",
+                owner,
+                deploymentSequence, groupSequence, orderSequence, providerId);
+        Objects.requireNonNull(owner);
+        Objects.requireNonNull(deploymentSequence);
+        Objects.requireNonNull(providerId);
+
+        groupSequence = defaultsTo(groupSequence, () -> "1");
+        orderSequence =
+                defaultsTo(orderSequence, () -> "1");
+
+        var requestUri = addQueryParameters(
+                URI.create(baseUri + BID_GET_URI),
+                new QueryParam("id.owner", owner),
+                new QueryParam("id.dseq", deploymentSequence),
+                new QueryParam("id.gseq", groupSequence),
+                new QueryParam("id.oseq", orderSequence),
+                new QueryParam("id.provider", providerId)
+        );
+
+        var responseParser = ResponseParserBuilder
+                .<Bid, Bid>newBuilder()
+                .withResultClass(Bid.class)
+                .build();
+        return getRequest(requestUri, responseParser);
+
+
+
+    }
+
+    @Override
     public Either<OperationFailure, DeploymentLease> getLease(
             String owner,
             String deploymentSequence,
             String groupSequence,
-            String oSeq,
+            String orderSequence,
             String provider
     ) {
         log.debug("getLease called for owner {} " +
@@ -211,12 +242,12 @@ public final class AkashClient implements Akash {
                 owner,
                 deploymentSequence,
                 groupSequence,
-                oSeq,
+                orderSequence,
                 provider);
         Objects.requireNonNull(owner);
         Objects.requireNonNull(deploymentSequence);
         Objects.requireNonNull(groupSequence);
-        Objects.requireNonNull(oSeq);
+        Objects.requireNonNull(orderSequence);
         Objects.requireNonNull(provider);
 
         // TODO HERE
@@ -233,8 +264,8 @@ public final class AkashClient implements Akash {
                 .build();
 
         var responseParser = ResponseParserBuilder
-                .<Deployment, Deployment>newBuilder()
-                .withResultClass(Deployment.class)
+                .<DeploymentLease, DeploymentLease>newBuilder()
+                .withResultClass(DeploymentLease.class)
                 .build();
 
         var bodyFuture = httpClientSupplier.get()
@@ -270,10 +301,28 @@ public final class AkashClient implements Akash {
         return extractEither(bodyFuture);
     }
 
+    private <T> Either<OperationFailure, T> getRequest(
+            URI requestUri,
+            ResponseParser<T> responseParser
+    ) {
+        var request = HttpRequest
+                .newBuilder(requestUri)
+                .GET()
+                .build();
 
-    private static <T> void defaultsTo(T instance, Supplier<T> defaultOnNull) {
+        var bodyFuture = httpClientSupplier.get()
+                .sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(responseParser::parseToEither);
+
+        return extractEither(bodyFuture);
+
+    }
+
+
+    private static <T> T defaultsTo(T instance, Supplier<T> defaultOnNull) {
         if (instance == null)
             instance = defaultOnNull.get();
+        return instance;
     }
 
     private static <T> Either<OperationFailure, T> extractEither(CompletableFuture<Either<OperationFailure, T>> future) {
@@ -283,11 +332,16 @@ public final class AkashClient implements Akash {
             Thread.currentThread().interrupt();
             return Either.left(new OperationFailure(ClientError, ex.getMessage()));
         }
+
+
     }
 
     private static final String DEPLOYMENT_LIST_URI = "/api/akash/deployment/v1beta2/deployments/list";
     private static final String DEPLOYMENT_GET_URI = "/api/akash/deployment/v1beta2/deployments/info";
-    private static final String BID_LIST_URI = "/api/akash/market/v1beta2/bids/list";
+
+    private static final String BID_BASE_URI = "/api/akash/market/v1beta2/bids/";
+    private static final String BID_GET_URI = BID_BASE_URI +"info";
+    private static final String BID_LIST_URI = BID_BASE_URI + "list";
 
 
 }

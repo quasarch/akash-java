@@ -1,0 +1,39 @@
+{
+  "bid": {
+    "bid_id": {
+      "owner": "akash1qqttharxgy9xjz9a28nlvs5rdhrcdchs2lfj5q",
+      "dseq": "4738338",
+      "gseq": 1,
+      "oseq": 1,
+      "provider": "akash1qhjtxmacslmefm3v4sn5ggq6ed9jn83cy2rjd0"
+    },
+    "state": "closed",
+    "price": {
+      "denom": "uakt",
+      "amount": "88.000000000000000000"
+    },
+    "created_at": "4738342"
+  },
+  "escrow_account": {
+    "id": {
+      "scope": "bid",
+      "xid": "akash1qqttharxgy9xjz9a28nlvs5rdhrcdchs2lfj5q/4738338/1/1/akash1qhjtxmacslmefm3v4sn5ggq6ed9jn83cy2rjd0"
+    },
+    "owner": "akash1qhjtxmacslmefm3v4sn5ggq6ed9jn83cy2rjd0",
+    "state": "closed",
+    "balance": {
+      "denom": "uakt",
+      "amount": "0.000000000000000000"
+    },
+    "transferred": {
+      "denom": "uakt",
+      "amount": "0.000000000000000000"
+    },
+    "settled_at": "4738380",
+    "depositor": "akash1qhjtxmacslmefm3v4sn5ggq6ed9jn83cy2rjd0",
+    "funds": {
+      "denom": "uakt",
+      "amount": "0.000000000000000000"
+    }
+  }
+}

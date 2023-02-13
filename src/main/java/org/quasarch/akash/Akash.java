@@ -124,19 +124,37 @@ public interface Akash {
             @Nullable String providerId,
             @Nullable String state);
 
+
+    /**
+     *
+     * @param owner mandatory, the account of the bid requester
+     * @param deploymentSequence  mandatory, the deployment sequence
+     * @param groupSequence group sequence, defaults to 1 if not provided
+     * @param orderSequence order sequence, defaults to 1 if not provided
+     * @param providerId
+     * @return
+     */
+    Either<OperationFailure,Bid> getBid(
+            String owner,
+            String deploymentSequence,
+            @Nullable String groupSequence,
+            @Nullable String orderSequence,
+             String providerId
+    );
+
     /**
      * Get lease	Get information regarding a lease such as its status.
      *
      * @param deploymentSequence The deployment sequence
-     * @param groupSequence      ?? -> 0 to x
-     * @param oSeq               ??
+     * @param groupSequence
+     * @param orderSequence
      * @return Either {@link OperationFailure} or - if successful - {@link DeploymentLease}
      */
     Either<OperationFailure, DeploymentLease> getLease(
             String owner,
             String deploymentSequence,
             String groupSequence,
-            String oSeq,
+            String orderSequence,
             String provider
     );
 

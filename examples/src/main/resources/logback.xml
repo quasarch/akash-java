@@ -4,9 +4,11 @@
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
-    <logger name="org.quasarch.akash" level="ERROR" />
+    <logger name="org.quasarch.akash" level="DEBUG" />
     <logger name="org.quasarch.akash.examples" level="DEBUG" />
-    <root level="warn">
+    <root level="debug">
         <appender-ref ref="STDOUT" />
     </root>
 </configuration>
+
+
