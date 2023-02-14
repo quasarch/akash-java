@@ -46,6 +46,31 @@ public interface Akash {
     Either<OperationFailure, Deployment> closedDeployment(String leaseId);
 
     /**
+     * TODO SPEC
+     * R_06 Provides lease creation capabilities
+     *
+     * @return
+     */
+    Either<OperationFailure, DeploymentLease> createLease();
+
+    /**
+     * TODO SPEC
+     * R_08 Provides a way for a manifest/SDL file to be send. Part of the deployment process
+     *
+     * @return
+     */
+    Either<OperationFailure, ?> sendManifest(Path sdlFile);
+
+    /**
+     * TODO SPEC
+     * R_09 updates the descriptor of an already deployment
+     *
+     * @return
+     */
+    Either<OperationFailure, ?> updateManifest(Path sdlFile);
+
+
+    /**
      * List all deployments matching the filters with consideration for page limits.
      * Not implemented: This might not be needed at all since listDeployments() support pagination
      * using {@link org.quasarch.akash.impl.pagination.AkashPagedIterable}.
@@ -177,14 +202,6 @@ public interface Akash {
             @Nullable String provider,
             @Nullable String state
     );
-
-    /**
-     *
-     * Missing methods:
-     * R_06	Create lease	Request through RPC.	1
-     * R_07	 Request through REST.	1
-     * R_08	Send manifest	Request through RPC.
-     */
 
 
 }
