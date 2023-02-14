@@ -241,8 +241,6 @@ class AkashClientTest {
     @Test
     void itShouldGetBid() throws IOException {
         var instance = new AkashClient("some-address", URI.create("http://localhost:" + client.getPort()), HttpClient::newHttpClient);
-
-
         var response = Files.readString(Path.of("src/test/resources/responses/get-bid-ok.json"));
         client.when(
                 request()
@@ -253,9 +251,8 @@ class AkashClientTest {
                         .withStatusCode(200)
                         .withBody(response)
         );
-
         var result = instance.getBid("akash1qqttharxgy9xjz9a28nlvs5rdhrcdchs2lfj5q", "asd",
-                null,null,
+                null, null,
                 "asdasd");
         if (result.isLeft()) {
             fail("error was " + result.getLeft());
@@ -265,15 +262,72 @@ class AkashClientTest {
         assertFalse(result.isLeft());
         // json parsing
         var bid = result.get();
-
-
         assertNotNull(bid.bid().bidId());
         assertNotNull(bid.escrowAccount().id());
     }
 
 
     @Test
-    void getLease() {
+    void itShouldGetLease() throws IOException {
+        var instance = new AkashClient("some-address", URI.create("http://localhost:" + client.getPort()), HttpClient::newHttpClient);
+        var response = Files.readString(Path.of("src/test/resources/responses/get-lease-ok.json"));
+        client.when(
+                request()
+                        .withMethod("GET")
+                        .withPath(""), Times.exactly(1)
+        ).respond(
+                response()
+                        .withStatusCode(200)
+                        .withBody(response)
+        );
+        var result = instance.getLease("akash1qqttharxgy9xjz9a28nlvs5rdhrcdchs2lfj5q", "asd",
+                null, null,
+                "asdasd");
+        if (result.isLeft()) {
+            fail("error was " + result.getLeft());
+            return;
+        }
+        // happy path
+        assertFalse(result.isLeft());
+        // json parsing
+        var bid = result.get();
+        assertNotNull(bid.leaseInfo().leaseId());
+        assertNotNull(bid.escrowPayment().paymentId());
+    }
+
+    @Test
+    void itShouldListLeases() throws IOException {
+        var instance = new AkashClient("some-address", URI.create("http://localhost:" + client.getPort()), HttpClient::newHttpClient);
+        var response = Files.readString(Path.of("src/test/resources/responses/listLeases-ok.json"));
+        client.when(
+                request()
+                        .withMethod("GET")
+                        .withPath(""), Times.exactly(1)
+        ).respond(
+                response()
+                        .withStatusCode(200)
+                        .withBody(response)
+        );
+
+        var result = instance.listLeases("akash1qqttharxgy9xjz9a28nlvs5rdhrcdchs2lfj5q", null,
+                null, null, null, null);
+        if (result.isLeft()) {
+            fail("error was " + result.getLeft());
+            return;
+        }
+        // happy path
+        assertFalse(result.isLeft());
+        // json parsing
+        var firstLease = StreamSupport
+                .stream(result.get().spliterator(), false)
+                .findFirst();
+
+        if (firstLease.isEmpty()) {
+            fail("could not find a single lease result");
+            return;
+        }
+        assertNotNull(firstLease.get().leaseInfo().leaseId().owner());
+        assertNotNull(firstLease.get().escrowPayment().rate().amount());
     }
 
 
@@ -284,7 +338,6 @@ class AkashClientTest {
                 Arguments.of(null, null)
         );
     }
-
 
 
 }

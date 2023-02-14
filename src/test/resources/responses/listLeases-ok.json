@@ -1,0 +1,1607 @@
+{
+  "leases": [
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9587519",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "created_at": "9587535",
+        "closed_on": "9587560"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9587519"
+        },
+        "payment_id": "1/1/akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "owner": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.528000000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "72"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9587870",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "created_at": "9587877",
+        "closed_on": "9587899"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9587870"
+        },
+        "payment_id": "1/1/akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "owner": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.824640000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "63"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9587962",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "created_at": "9587970",
+        "closed_on": "9588053"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9587962"
+        },
+        "payment_id": "1/1/akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "owner": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.792960000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "240"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9588075",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "created_at": "9588082",
+        "closed_on": "9594063"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9588075"
+        },
+        "payment_id": "1/1/akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "owner": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.598720000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "17351"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9588216",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "created_at": "9588226",
+        "closed_on": "9589461"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9588216"
+        },
+        "payment_id": "1/1/akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "owner": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.883200000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "3582"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9589026",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "created_at": "9589033",
+        "closed_on": "9594067"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9589026"
+        },
+        "payment_id": "1/1/akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "owner": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.238080000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "14604"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9589121",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "created_at": "9589128",
+        "closed_on": "9594069"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9589121"
+        },
+        "payment_id": "1/1/akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "owner": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.433920000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "14334"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9589249",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1lmaulqyvlj0wwcjm5dgqn5wv5j957g672g20ht"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "3.728800000000000000"
+        },
+        "created_at": "9589255",
+        "closed_on": "9594071"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9589249"
+        },
+        "payment_id": "1/1/akash1lmaulqyvlj0wwcjm5dgqn5wv5j957g672g20ht",
+        "owner": "akash1lmaulqyvlj0wwcjm5dgqn5wv5j957g672g20ht",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "3.728800000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.900800000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "17957"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9589464",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "created_at": "9589470",
+        "closed_on": "9594073"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9589464"
+        },
+        "payment_id": "1/1/akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "owner": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.855360000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "13353"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9594193",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "created_at": "9594199",
+        "closed_on": "9608424"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9594193"
+        },
+        "payment_id": "1/1/akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "owner": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.432000000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "41268"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9594245",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "created_at": "9594252",
+        "closed_on": "9608427"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9594245"
+        },
+        "payment_id": "1/1/akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "owner": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.376000000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "41123"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9594261",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "created_at": "9594267",
+        "closed_on": "9608432"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9594261"
+        },
+        "payment_id": "1/1/akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "owner": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.364800000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "41094"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9594281",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "created_at": "9594289",
+        "closed_on": "9608436"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9594281"
+        },
+        "payment_id": "1/1/akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "owner": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.144640000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "41042"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9594306",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1lmaulqyvlj0wwcjm5dgqn5wv5j957g672g20ht"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "3.728800000000000000"
+        },
+        "created_at": "9594312",
+        "closed_on": "9608438"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9594306"
+        },
+        "payment_id": "1/1/akash1lmaulqyvlj0wwcjm5dgqn5wv5j957g672g20ht",
+        "owner": "akash1lmaulqyvlj0wwcjm5dgqn5wv5j957g672g20ht",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "3.728800000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.028800000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "52673"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9594322",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1lmaulqyvlj0wwcjm5dgqn5wv5j957g672g20ht"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "3.728800000000000000"
+        },
+        "created_at": "9594330",
+        "closed_on": "9608434"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9594322"
+        },
+        "payment_id": "1/1/akash1lmaulqyvlj0wwcjm5dgqn5wv5j957g672g20ht",
+        "owner": "akash1lmaulqyvlj0wwcjm5dgqn5wv5j957g672g20ht",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "3.728800000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.995200000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "52590"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9609415",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "created_at": "9609422",
+        "closed_on": "9624330"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9609415"
+        },
+        "payment_id": "1/1/akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "owner": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.896960000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "43249"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9609472",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "created_at": "9609484",
+        "closed_on": "9624333"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9609472"
+        },
+        "payment_id": "1/1/akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "owner": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.730880000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "43078"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9609527",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "created_at": "9609534",
+        "closed_on": "9624336"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9609527"
+        },
+        "payment_id": "1/1/akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "owner": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.378240000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "42942"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9609698",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1lmaulqyvlj0wwcjm5dgqn5wv5j957g672g20ht"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "3.728800000000000000"
+        },
+        "created_at": "9609721",
+        "closed_on": "9624338"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9609698"
+        },
+        "payment_id": "1/1/akash1lmaulqyvlj0wwcjm5dgqn5wv5j957g672g20ht",
+        "owner": "akash1lmaulqyvlj0wwcjm5dgqn5wv5j957g672g20ht",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "3.728800000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.869600000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "54503"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9609783",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1lmaulqyvlj0wwcjm5dgqn5wv5j957g672g20ht"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "3.728800000000000000"
+        },
+        "created_at": "9609789",
+        "closed_on": "9624341"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9609783"
+        },
+        "payment_id": "1/1/akash1lmaulqyvlj0wwcjm5dgqn5wv5j957g672g20ht",
+        "owner": "akash1lmaulqyvlj0wwcjm5dgqn5wv5j957g672g20ht",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "3.728800000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.497600000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "54261"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9609812",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash19yhu3jgw8h0320av98h8n5qczje3pj3u9u2amp"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "4.000000000000000000"
+        },
+        "created_at": "9609848",
+        "closed_on": "9624343"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9609812"
+        },
+        "payment_id": "1/1/akash19yhu3jgw8h0320av98h8n5qczje3pj3u9u2amp",
+        "owner": "akash19yhu3jgw8h0320av98h8n5qczje3pj3u9u2amp",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "4.000000000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.000000000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "57980"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9624361",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "created_at": "9624367",
+        "closed_on": "9765292"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9624361"
+        },
+        "payment_id": "1/1/akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "owner": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.336000000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "408840"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9624382",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "created_at": "9624387",
+        "closed_on": "9765321"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9624382"
+        },
+        "payment_id": "1/1/akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "owner": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.446080000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "408866"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9624398",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "created_at": "9624403",
+        "closed_on": "9765319"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9624398"
+        },
+        "payment_id": "1/1/akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "owner": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.225920000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "408814"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9624410",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1guhc5gc5hx8sqfq5evcc5fja8ux2y5nl8q7q07"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "4.000000000000000000"
+        },
+        "created_at": "9624417",
+        "closed_on": "9765316"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9624410"
+        },
+        "payment_id": "1/1/akash1guhc5gc5hx8sqfq5evcc5fja8ux2y5nl8q7q07",
+        "owner": "akash1guhc5gc5hx8sqfq5evcc5fja8ux2y5nl8q7q07",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "4.000000000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.000000000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "563596"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9624427",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1lmaulqyvlj0wwcjm5dgqn5wv5j957g672g20ht"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "3.728800000000000000"
+        },
+        "created_at": "9624435",
+        "closed_on": "9625641"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9624427"
+        },
+        "payment_id": "1/1/akash1lmaulqyvlj0wwcjm5dgqn5wv5j957g672g20ht",
+        "owner": "akash1lmaulqyvlj0wwcjm5dgqn5wv5j957g672g20ht",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "3.728800000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.932800000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "4496"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9624444",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1lmaulqyvlj0wwcjm5dgqn5wv5j957g672g20ht"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "3.728800000000000000"
+        },
+        "created_at": "9624450",
+        "closed_on": "9625638"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9624444"
+        },
+        "payment_id": "1/1/akash1lmaulqyvlj0wwcjm5dgqn5wv5j957g672g20ht",
+        "owner": "akash1lmaulqyvlj0wwcjm5dgqn5wv5j957g672g20ht",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "3.728800000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.814400000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "4429"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9624867",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash19yhu3jgw8h0320av98h8n5qczje3pj3u9u2amp"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "5.000000000000000000"
+        },
+        "created_at": "9624883",
+        "closed_on": "9765314"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9624867"
+        },
+        "payment_id": "1/1/akash19yhu3jgw8h0320av98h8n5qczje3pj3u9u2amp",
+        "owner": "akash19yhu3jgw8h0320av98h8n5qczje3pj3u9u2amp",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "5.000000000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.000000000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "702155"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9624928",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash19yhu3jgw8h0320av98h8n5qczje3pj3u9u2amp"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "5.000000000000000000"
+        },
+        "created_at": "9624934",
+        "closed_on": "9765312"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9624928"
+        },
+        "payment_id": "1/1/akash19yhu3jgw8h0320av98h8n5qczje3pj3u9u2amp",
+        "owner": "akash19yhu3jgw8h0320av98h8n5qczje3pj3u9u2amp",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "5.000000000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.000000000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "701890"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9624974",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash19yhu3jgw8h0320av98h8n5qczje3pj3u9u2amp"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "5.000000000000000000"
+        },
+        "created_at": "9624980",
+        "closed_on": "9765310"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9624974"
+        },
+        "payment_id": "1/1/akash19yhu3jgw8h0320av98h8n5qczje3pj3u9u2amp",
+        "owner": "akash19yhu3jgw8h0320av98h8n5qczje3pj3u9u2amp",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "5.000000000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.000000000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "701650"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9625163",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash19yhu3jgw8h0320av98h8n5qczje3pj3u9u2amp"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "5.000000000000000000"
+        },
+        "created_at": "9625170",
+        "closed_on": "9765307"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9625163"
+        },
+        "payment_id": "1/1/akash19yhu3jgw8h0320av98h8n5qczje3pj3u9u2amp",
+        "owner": "akash19yhu3jgw8h0320av98h8n5qczje3pj3u9u2amp",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "5.000000000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.000000000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "700685"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9625203",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash19yhu3jgw8h0320av98h8n5qczje3pj3u9u2amp"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "5.000000000000000000"
+        },
+        "created_at": "9625208",
+        "closed_on": "9765305"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9625203"
+        },
+        "payment_id": "1/1/akash19yhu3jgw8h0320av98h8n5qczje3pj3u9u2amp",
+        "owner": "akash19yhu3jgw8h0320av98h8n5qczje3pj3u9u2amp",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "5.000000000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.000000000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "700485"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9625260",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash19yhu3jgw8h0320av98h8n5qczje3pj3u9u2amp"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "5.000000000000000000"
+        },
+        "created_at": "9625266",
+        "closed_on": "9765303"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9625260"
+        },
+        "payment_id": "1/1/akash19yhu3jgw8h0320av98h8n5qczje3pj3u9u2amp",
+        "owner": "akash19yhu3jgw8h0320av98h8n5qczje3pj3u9u2amp",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "5.000000000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.000000000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "700185"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9625645",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash19yhu3jgw8h0320av98h8n5qczje3pj3u9u2amp"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "5.000000000000000000"
+        },
+        "created_at": "9625652",
+        "closed_on": "9765301"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9625645"
+        },
+        "payment_id": "1/1/akash19yhu3jgw8h0320av98h8n5qczje3pj3u9u2amp",
+        "owner": "akash19yhu3jgw8h0320av98h8n5qczje3pj3u9u2amp",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "5.000000000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.000000000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "698245"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9625662",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash19yhu3jgw8h0320av98h8n5qczje3pj3u9u2amp"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "5.000000000000000000"
+        },
+        "created_at": "9625669",
+        "closed_on": "9765298"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9625662"
+        },
+        "payment_id": "1/1/akash19yhu3jgw8h0320av98h8n5qczje3pj3u9u2amp",
+        "owner": "akash19yhu3jgw8h0320av98h8n5qczje3pj3u9u2amp",
+        "state": "closed",
+        "rate": {
+          "denom": "uakt",
+          "amount": "5.000000000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.000000000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "698145"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9765481",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc"
+        },
+        "state": "active",
+        "price": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "created_at": "9765490",
+        "closed_on": "0"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9765481"
+        },
+        "payment_id": "1/1/akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "owner": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "state": "open",
+        "rate": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.370880000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "34375"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9765513",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc"
+        },
+        "state": "active",
+        "price": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "created_at": "9765538",
+        "closed_on": "0"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9765513"
+        },
+        "payment_id": "1/1/akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "owner": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "state": "open",
+        "rate": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.370880000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "34375"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9765574",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc"
+        },
+        "state": "active",
+        "price": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "created_at": "9765592",
+        "closed_on": "0"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9765574"
+        },
+        "payment_id": "1/1/akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "owner": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "state": "open",
+        "rate": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.370880000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "34375"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9765626",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc"
+        },
+        "state": "active",
+        "price": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "created_at": "9765630",
+        "closed_on": "0"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9765626"
+        },
+        "payment_id": "1/1/akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "owner": "akash1cx9cc98ttn92wlj8zs5vyn2u7a5t8ray25cdpc",
+        "state": "open",
+        "rate": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.469760000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "34372"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9765652",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1mn3fx53ngzptq7l4h4f0mqa0yj6fd8pd0s2xgm"
+        },
+        "state": "active",
+        "price": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "created_at": "9765658",
+        "closed_on": "0"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9765652"
+        },
+        "payment_id": "1/1/akash1mn3fx53ngzptq7l4h4f0mqa0yj6fd8pd0s2xgm",
+        "owner": "akash1mn3fx53ngzptq7l4h4f0mqa0yj6fd8pd0s2xgm",
+        "state": "open",
+        "rate": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.434240000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "34021"
+        }
+      }
+    },
+    {
+      "lease": {
+        "lease_id": {
+          "owner": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9",
+          "dseq": "9765699",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1mn3fx53ngzptq7l4h4f0mqa0yj6fd8pd0s2xgm"
+        },
+        "state": "active",
+        "price": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "created_at": "9765709",
+        "closed_on": "0"
+      },
+      "escrow_payment": {
+        "account_id": {
+          "scope": "deployment",
+          "xid": "akash1qpqpgv9zgesuxfx7sak32yuf0lmsytp9frysy9/9765699"
+        },
+        "payment_id": "1/1/akash1mn3fx53ngzptq7l4h4f0mqa0yj6fd8pd0s2xgm",
+        "owner": "akash1mn3fx53ngzptq7l4h4f0mqa0yj6fd8pd0s2xgm",
+        "state": "open",
+        "rate": {
+          "denom": "uakt",
+          "amount": "2.901120000000000000"
+        },
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.598400000000000000"
+        },
+        "withdrawn": {
+          "denom": "uakt",
+          "amount": "33928"
+        }
+      }
+    }
+  ],
+  "pagination": {
+    "next_key": null,
+    "total": "41"
+  }
+}

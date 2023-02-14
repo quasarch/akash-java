@@ -5,7 +5,7 @@ import org.jetbrains.annotations.Nullable;
 import org.quasarch.akash.model.PagedResponse;
 import org.quasarch.akash.model.remote.Bid;
 
-import org.quasarch.akash.model.DeploymentLease;
+import org.quasarch.akash.model.remote.DeploymentLease;
 import org.quasarch.akash.model.OperationFailure;
 import org.quasarch.akash.model.remote.Deployment;
 
@@ -106,6 +106,7 @@ public interface Akash {
     /**
      * Get the list of bids based on a set of filters.
      *
+     * @param owner
      * @param deploymentSequence The deployment sequence
      * @param groupSequence      GSEQ is used to distinguish “groups” of containers in a deployment.
      *                           Each group can be leased independently -
@@ -126,20 +127,19 @@ public interface Akash {
 
 
     /**
-     *
-     * @param owner mandatory, the account of the bid requester
-     * @param deploymentSequence  mandatory, the deployment sequence
-     * @param groupSequence group sequence, defaults to 1 if not provided
-     * @param orderSequence order sequence, defaults to 1 if not provided
+     * @param owner              mandatory, the account of the bid requester
+     * @param deploymentSequence mandatory, the deployment sequence
+     * @param groupSequence      group sequence, defaults to 1 if not provided
+     * @param orderSequence      order sequence, defaults to 1 if not provided
      * @param providerId
      * @return
      */
-    Either<OperationFailure,Bid> getBid(
+    Either<OperationFailure, Bid> getBid(
             String owner,
             String deploymentSequence,
             @Nullable String groupSequence,
             @Nullable String orderSequence,
-             String providerId
+            String providerId
     );
 
     /**
@@ -156,6 +156,26 @@ public interface Akash {
             String groupSequence,
             String orderSequence,
             String provider
+    );
+
+    /**
+     * List all the leases for a given filter set
+     *
+     * @param owner              the account address of the lease owner
+     * @param deploymentSequence the deployment sequence
+     * @param groupSequence      the group sequence
+     * @param orderSequence      the order sequence
+     * @param provider
+     * @param state              state can be one of ( completed, active, open )
+     * @return Can be a {@link DeploymentLease} iterable, or a failure
+     */
+    Either<OperationFailure, Iterable<DeploymentLease>> listLeases(
+            @Nullable String owner,
+            @Nullable String deploymentSequence,
+            @Nullable String groupSequence,
+            @Nullable String orderSequence,
+            @Nullable String provider,
+            @Nullable String state
     );
 
     /**
