@@ -1,4 +1,8 @@
 package org.quasarch.akash.model;
 
-public record OperationFailure() {
+import org.quasarch.akash.model.remote.AkashErrorType;
+
+public record OperationFailure(AkashErrorType errorType, String failureInnerMessage) {
+
 }
+

@@ -1,0 +1,99 @@
+{
+  "deployment": {
+    "deployment_id": {
+      "owner": "akash1qqzwc5d7hynl67nsmn9jukvwqp3vzdl6j2t7lk",
+      "dseq": "1027706"
+    },
+    "state": "closed",
+    "version": "JVutORwsoCSkdzhlnZgs/IxkcXRaxxPIyUwIkyN1F9M=",
+    "created_at": "1027707"
+  },
+  "groups": [
+    {
+      "group_id": {
+        "owner": "akash1qqzwc5d7hynl67nsmn9jukvwqp3vzdl6j2t7lk",
+        "dseq": "1027706",
+        "gseq": 1
+      },
+      "state": "closed",
+      "group_spec": {
+        "name": "westcoast",
+        "requirements": {
+          "signed_by": {
+            "all_of": [],
+            "any_of": [
+              "akash1qqzwc5d7hynl67nsmn9jukvwqp3vzdl6j2t7lk"
+            ]
+          },
+          "attributes": [
+            {
+              "key": "host",
+              "value": "akash"
+            }
+          ]
+        },
+        "resources": [
+          {
+            "resources": {
+              "cpu": {
+                "units": {
+                  "val": "1000"
+                },
+                "attributes": []
+              },
+              "memory": {
+                "quantity": {
+                  "val": "536870912"
+                },
+                "attributes": []
+              },
+              "storage": [
+                {
+                  "name": "default",
+                  "quantity": {
+                    "val": "1073741824"
+                  },
+                  "attributes": []
+                }
+              ],
+              "endpoints": [
+                {
+                  "kind": "RANDOM_PORT",
+                  "sequence_number": 0
+                }
+              ]
+            },
+            "count": 1,
+            "price": {
+              "denom": "uakt",
+              "amount": "100.000000000000000000"
+            }
+          }
+        ]
+      },
+      "created_at": "1027707"
+    }
+  ],
+  "escrow_account": {
+    "id": {
+      "scope": "deployment",
+      "xid": "akash1qqzwc5d7hynl67nsmn9jukvwqp3vzdl6j2t7lk/1027706"
+    },
+    "owner": "akash1qqzwc5d7hynl67nsmn9jukvwqp3vzdl6j2t7lk",
+    "state": "closed",
+    "balance": {
+      "denom": "uakt",
+      "amount": "0.000000000000000000"
+    },
+    "transferred": {
+      "denom": "uakt",
+      "amount": "0.000000000000000000"
+    },
+    "settled_at": "1027769",
+    "depositor": "akash1qqzwc5d7hynl67nsmn9jukvwqp3vzdl6j2t7lk",
+    "funds": {
+      "denom": "uakt",
+      "amount": "0.000000000000000000"
+    }
+  }
+}

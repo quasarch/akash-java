@@ -1,0 +1,164 @@
+{
+  "bids": [
+    {
+      "bid": {
+        "bid_id": {
+          "owner": "akash1qqttharxgy9xjz9a28nlvs5rdhrcdchs2lfj5q",
+          "dseq": "4738338",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1qhjtxmacslmefm3v4sn5ggq6ed9jn83cy2rjd0"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "88.000000000000000000"
+        },
+        "created_at": "4738342"
+      },
+      "escrow_account": {
+        "id": {
+          "scope": "bid",
+          "xid": "akash1qqttharxgy9xjz9a28nlvs5rdhrcdchs2lfj5q/4738338/1/1/akash1qhjtxmacslmefm3v4sn5ggq6ed9jn83cy2rjd0"
+        },
+        "owner": "akash1qhjtxmacslmefm3v4sn5ggq6ed9jn83cy2rjd0",
+        "state": "closed",
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.000000000000000000"
+        },
+        "transferred": {
+          "denom": "uakt",
+          "amount": "0.000000000000000000"
+        },
+        "settled_at": "4738380",
+        "depositor": "akash1qhjtxmacslmefm3v4sn5ggq6ed9jn83cy2rjd0",
+        "funds": {
+          "denom": "uakt",
+          "amount": "0.000000000000000000"
+        }
+      }
+    },
+    {
+      "bid": {
+        "bid_id": {
+          "owner": "akash1qqttharxgy9xjz9a28nlvs5rdhrcdchs2lfj5q",
+          "dseq": "4738338",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash19yhu3jgw8h0320av98h8n5qczje3pj3u9u2amp"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "86.000000000000000000"
+        },
+        "created_at": "4738342"
+      },
+      "escrow_account": {
+        "id": {
+          "scope": "bid",
+          "xid": "akash1qqttharxgy9xjz9a28nlvs5rdhrcdchs2lfj5q/4738338/1/1/akash19yhu3jgw8h0320av98h8n5qczje3pj3u9u2amp"
+        },
+        "owner": "akash19yhu3jgw8h0320av98h8n5qczje3pj3u9u2amp",
+        "state": "closed",
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.000000000000000000"
+        },
+        "transferred": {
+          "denom": "uakt",
+          "amount": "0.000000000000000000"
+        },
+        "settled_at": "4738380",
+        "depositor": "akash19yhu3jgw8h0320av98h8n5qczje3pj3u9u2amp",
+        "funds": {
+          "denom": "uakt",
+          "amount": "0.000000000000000000"
+        }
+      }
+    },
+    {
+      "bid": {
+        "bid_id": {
+          "owner": "akash1qqttharxgy9xjz9a28nlvs5rdhrcdchs2lfj5q",
+          "dseq": "4738338",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1g8m36ge6yekgkfktl08x8vrp0nq9v0l73jzy32"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "86.000000000000000000"
+        },
+        "created_at": "4738342"
+      },
+      "escrow_account": {
+        "id": {
+          "scope": "bid",
+          "xid": "akash1qqttharxgy9xjz9a28nlvs5rdhrcdchs2lfj5q/4738338/1/1/akash1g8m36ge6yekgkfktl08x8vrp0nq9v0l73jzy32"
+        },
+        "owner": "akash1g8m36ge6yekgkfktl08x8vrp0nq9v0l73jzy32",
+        "state": "closed",
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.000000000000000000"
+        },
+        "transferred": {
+          "denom": "uakt",
+          "amount": "0.000000000000000000"
+        },
+        "settled_at": "4738380",
+        "depositor": "akash1g8m36ge6yekgkfktl08x8vrp0nq9v0l73jzy32",
+        "funds": {
+          "denom": "uakt",
+          "amount": "0.000000000000000000"
+        }
+      }
+    },
+    {
+      "bid": {
+        "bid_id": {
+          "owner": "akash1qqttharxgy9xjz9a28nlvs5rdhrcdchs2lfj5q",
+          "dseq": "4738338",
+          "gseq": 1,
+          "oseq": 1,
+          "provider": "akash1wxr49evm8hddnx9ujsdtd86gk46s7ejnccqfmy"
+        },
+        "state": "closed",
+        "price": {
+          "denom": "uakt",
+          "amount": "97.000000000000000000"
+        },
+        "created_at": "4738342"
+      },
+      "escrow_account": {
+        "id": {
+          "scope": "bid",
+          "xid": "akash1qqttharxgy9xjz9a28nlvs5rdhrcdchs2lfj5q/4738338/1/1/akash1wxr49evm8hddnx9ujsdtd86gk46s7ejnccqfmy"
+        },
+        "owner": "akash1wxr49evm8hddnx9ujsdtd86gk46s7ejnccqfmy",
+        "state": "closed",
+        "balance": {
+          "denom": "uakt",
+          "amount": "0.000000000000000000"
+        },
+        "transferred": {
+          "denom": "uakt",
+          "amount": "0.000000000000000000"
+        },
+        "settled_at": "4738379",
+        "depositor": "akash1wxr49evm8hddnx9ujsdtd86gk46s7ejnccqfmy",
+        "funds": {
+          "denom": "uakt",
+          "amount": "0.000000000000000000"
+        }
+      }
+    }
+  ],
+  "pagination": {
+    "next_key": "asdasdasdasdas",
+    "total": "8"
+  }
+}
