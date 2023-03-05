@@ -90,3 +90,6 @@ From the current akash SDK, those are the expected errors:
 | ErrIO                      | 39     | Internal IO error                                                                         | Yes          | AkashNetworkError        |
 | ErrAppConfig               | 40     | error in app.toml                                                                         | ??           | ??                       |
 | ErrPanic                   | 111222 | panic                                                                                     | Yes          | AkashNetworkError        |
+
+# References 
+
