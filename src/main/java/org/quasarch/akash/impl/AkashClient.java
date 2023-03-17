@@ -73,6 +73,23 @@ public final class AkashClient implements Akash {
         return null;
     }
 
+    @Override
+    public Either<OperationFailure, DeploymentLease> createLease() {
+        return null;
+    }
+
+    @Override
+    public Either<OperationFailure, ?> sendManifest(Path sdlFile) {
+        Deployment a = new Deployment();
+
+        return null;
+    }
+
+    @Override
+    public Either<OperationFailure, ?> updateManifest(Path sdlFile) {
+        return null;
+    }
+
 
     @Override
     public Either<OperationFailure, Iterable<Deployment>> listDeployments(
