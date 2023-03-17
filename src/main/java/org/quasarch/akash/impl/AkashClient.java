@@ -17,6 +17,7 @@ import org.quasarch.akash.model.remote.ListDeploymentsResponse;
 import org.quasarch.akash.uri.QueryParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import shaded_package.org.apache.commons.lang3.NotImplementedException;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -70,7 +71,22 @@ public final class AkashClient implements Akash {
 
     @Override
     public Either<OperationFailure, Deployment> closedDeployment(String leaseId) {
-        return null;
+        throw new NotImplementedException("");
+    }
+
+    @Override
+    public Either<OperationFailure, DeploymentLease> createLease() {
+        throw new NotImplementedException("");
+    }
+
+    @Override
+    public Either<OperationFailure, ?> sendManifest(Path sdlFile) {
+        throw new NotImplementedException("");
+    }
+
+    @Override
+    public Either<OperationFailure, ?> updateManifest(Path sdlFile) {
+        throw new NotImplementedException("");
     }
 
 
