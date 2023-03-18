@@ -12,7 +12,7 @@ import java.util.function.Function;
  * Iterable implementation take supports fetching more data upstream.
  * It abstracts the concept of page, using next key.
  *
- * @param <T>
+ * @param <T> type of iterable
  */
 public class AkashPagedIterable<T> implements Iterable<T> {
 

@@ -8,8 +8,8 @@ import java.nio.charset.StandardCharsets;
  * A query param to be passed ( encoded ) to a {@link java.net.URI} instance
  * in the format name=value.
  *
- * @param name
- * @param value
+ * @param name name of query parameter, which will be the key
+ * @param value the value of the query parameter
  */
 public record QueryParam(String name, String value) {
 

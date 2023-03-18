@@ -130,7 +130,7 @@ public final class AkashClient implements Akash {
     /**
      * @param owner              ??
      * @param deploymentSequence ??
-     * @return
+     * @return Either {@link Deployment} or {@link OperationFailure} on failure
      * @see Akash#getDeployment(String, String)
      */
     @Override

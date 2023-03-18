@@ -8,10 +8,10 @@ import java.util.function.Function;
  * Usage example (full, with intermediate operation)
  * <pre>
  * ResponseParserBuilder
- *                 .<AkashPagedResponse<Deployment>, ListDeploymentsResponse>newBuilder()
+ *                 {@code .<AkashPagedResponse<Deployment>, ListDeploymentsResponse>newBuilder()}
  *                 .withResultClass(ListDeploymentsResponse.class)
  *                 .withIntermediateOperation(
- *                         intermediate -> new AkashPagedResponse<>(intermediate.deployments(),
+ *                         {@code intermediate -> new AkashPagedResponse<>(intermediate.deployments(),}
  *                                 intermediate.pagination())
  *                 .build()
  * </pre>
@@ -19,7 +19,7 @@ import java.util.function.Function;
  * Usage example (simples, nointermediate operation)
  * <pre>
  * ResponseParserBuilder
- *                 .<AkashPagedResponse<Deployment>, ListDeploymentsResponse>newBuilder()
+ *                 {@code .<AkashPagedResponse<Deployment>, ListDeploymentsResponse>newBuilder() }
  *                 .withResultClass(ListDeploymentsResponse.class)
  *                 .build()
  * </pre>

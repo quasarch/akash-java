@@ -20,8 +20,6 @@ import java.nio.file.Path;
  * This client supports operations highlighted in
  * <a href="https://github.com/akash-network/community/blob/main/sig-clients/client-libraries/prd.md">...</a>
  * </p>
- * <p>
- * <p>
  * Open questions: Should we really use Either in this interface?
  */
 public interface Akash {
@@ -31,6 +29,7 @@ public interface Akash {
      *
      * @param sdlFile Path to the template file
      *                * @return Either {@link OperationFailure} or - if successful - {@link Deployment}
+     * @return Either with {@link Deployment} or with 'left' failure containing {@link OperationFailure}
      */
     Either<OperationFailure, Deployment> createDeployment(Path sdlFile);
 
@@ -41,15 +40,15 @@ public interface Akash {
      *
      * @param leaseId The id of the lease which will be terminated
      *                * @return Either {@link OperationFailure} or - if successful - {@link Deployment}
+     * @return Either with {@link Deployment} or with 'left' failure containing {@link OperationFailure}
      * @implNote Request through RPC
      */
     Either<OperationFailure, Deployment> closedDeployment(String leaseId);
 
     /**
-     * TODO SPEC
      * R_06 Provides lease creation capabilities
      *
-     * @return
+     * @return TBD
      */
     Either<OperationFailure, DeploymentLease> createLease();
 
@@ -57,7 +56,8 @@ public interface Akash {
      * TODO SPEC
      * R_08 Provides a way for a manifest/SDL file to be send. Part of the deployment process
      *
-     * @return
+     * @param sdlFile the path for the deployment file descriptor
+     * @return TBD
      */
     Either<OperationFailure, ?> sendManifest(Path sdlFile);
 
@@ -65,25 +65,11 @@ public interface Akash {
      * TODO SPEC
      * R_09 updates the descriptor of an already deployment
      *
-     * @return
+     * @param sdlFile the path for the deployment file descriptor
+     * @return TBD
      */
     Either<OperationFailure, ?> updateManifest(Path sdlFile);
 
-
-    /**
-     * List all deployments matching the filters with consideration for page limits.
-     * Not implemented: This might not be needed at all since listDeployments() support pagination
-     * using {@link org.quasarch.akash.impl.pagination.AkashPagedIterable}.
-     * Kept for future iterations
-     *
-     * @param page               page number, 0 based index. Defaults to 0
-     * @param resultPerPage      how many results per page. max is ??. Default to 10
-     * @param deploymentSequence Deployment sequence number
-     * @return Either {@link OperationFailure} or - if successful - {@link PagedResponse< Deployment >}
-     * @implSpec Request through REST.
-    Either<OperationFailure, PagedResponse<Deployment>> listDeployments(@Nullable Short page,
-     @Nullable Short resultPerPage,
-     String deploymentSequence);*/
 
     /**
      * List all the deployment for given ( optional ) filters.
@@ -110,28 +96,11 @@ public interface Akash {
      */
     Either<OperationFailure, Deployment> getDeployment(String owner, String deploymentSequence);
 
-    /**
-     * Get the list of bids based on a set of filters.
-     * Not implemented: This might not be needed at all since listDeployments() support pagination
-     *      * using {@link org.quasarch.akash.impl.pagination.AkashPagedIterable}.
-     *      * Kept for future iterations
-     * @param deploymentSequence
-     * @param groupSequence      0 to x
-     * @param oSeq               ??
-     * @param providerId         identification of the provider
-     * @param state              ??
-     * @return A failure represented by {@link OperationFailure} or an {@link PagedResponse<Bid>}
-     * @implSpec Request through REST.
-
-    Either<OperationFailure, PagedResponse<Bid>> listBids(String deploymentSequence, String groupSequence,
-    String oSeq, String providerId, String state,
-    short page, short resultsPerPage);
-     */
 
     /**
      * Get the list of bids based on a set of filters.
      *
-     * @param owner
+     * @param owner              owner of the bid
      * @param deploymentSequence The deployment sequence
      * @param groupSequence      GSEQ is used to distinguish “groups” of containers in a deployment.
      *                           Each group can be leased independently -
@@ -156,8 +125,8 @@ public interface Akash {
      * @param deploymentSequence mandatory, the deployment sequence
      * @param groupSequence      group sequence, defaults to 1 if not provided
      * @param orderSequence      order sequence, defaults to 1 if not provided
-     * @param providerId
-     * @return
+     * @param providerId         id of the provider where the bid was made
+     * @return Either the {@link Bid} object or the {@link OperationFailure} on failure
      */
     Either<OperationFailure, Bid> getBid(
             String owner,
@@ -171,8 +140,10 @@ public interface Akash {
      * Get lease	Get information regarding a lease such as its status.
      *
      * @param deploymentSequence The deployment sequence
-     * @param groupSequence
-     * @param orderSequence
+     * @param groupSequence      sequence which identifies deployment group
+     * @param orderSequence      sequence of the deployment order
+     * @param owner              the account address of the lease owner
+     * @param provider           identification of the provider where the lease was made
      * @return Either {@link OperationFailure} or - if successful - {@link DeploymentLease}
      */
     Either<OperationFailure, DeploymentLease> getLease(
@@ -190,7 +161,7 @@ public interface Akash {
      * @param deploymentSequence the deployment sequence
      * @param groupSequence      the group sequence
      * @param orderSequence      the order sequence
-     * @param provider
+     * @param provider           identification of the provider where the lease was made
      * @param state              state can be one of ( completed, active, open )
      * @return Can be a {@link DeploymentLease} iterable, or a failure
      */

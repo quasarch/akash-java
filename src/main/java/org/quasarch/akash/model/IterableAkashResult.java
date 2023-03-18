@@ -1,5 +1,4 @@
 package org.quasarch.akash.model;
-
 import java.util.Iterator;
 import java.util.Spliterator;
 import java.util.function.Consumer;
@@ -9,7 +8,7 @@ import java.util.function.Consumer;
  * next_key.
  * For improved usability {@link Iterable} is implemented
  *
- * @param <T>
+ * @param <T> the type of iterable
  */
 public class IterableAkashResult<T> implements Iterable<T> {
     @Override
