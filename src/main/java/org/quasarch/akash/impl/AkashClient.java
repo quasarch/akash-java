@@ -36,6 +36,7 @@ import static org.quasarch.akash.uri.UriUtils.addQueryParameters;
  * Implementation of {@link Akash}.
  */
 public final class AkashClient implements Akash {
+
     private final String accountAddress;
     private final URI baseUri;
     private final Supplier<HttpClient> httpClientSupplier;
@@ -57,6 +58,13 @@ public final class AkashClient implements Akash {
         this.httpClientSupplier = () -> httpClient;
     }
 
+    /**
+     * Constructor for {@link AkashClient}
+     *
+     * @param accountAddress     the address for the akt account
+     * @param baseUri            base uri for the api
+     * @param httpClientSupplier supplier of {@link HttpClient}
+     */
     public AkashClient(String accountAddress, URI baseUri, Supplier<HttpClient> httpClientSupplier) {
         this.accountAddress = accountAddress;
         this.baseUri = baseUri;
@@ -104,9 +112,9 @@ public final class AkashClient implements Akash {
 
         var requestUri = addQueryParameters(
                 URI.create(baseUri + DEPLOYMENT_LIST_URI),
-                new QueryParam("filters.owner", owner),
-                new QueryParam("filters.dseq", deploymentSequence),
-                new QueryParam("filters.state", state)
+                new QueryParam(FILTERS_OWNER, owner),
+                new QueryParam(FILTERS_DSEQ, deploymentSequence),
+                new QueryParam(FILTERS_STATE, state)
         );
         log.debug("using {} path to list deployments", requestUri);
         var responseParser = ResponseParserBuilder
@@ -119,7 +127,7 @@ public final class AkashClient implements Akash {
                 .build();
         return listRequest(requestUri, responseParser).map(fPage -> new AkashPagedIterable<>(
                 nextPage -> listRequest(addQueryParameters(requestUri,
-                        new QueryParam("pagination.key", nextPage)
+                        new QueryParam(PAGINATION_KEY, nextPage)
                 ), responseParser).get(),
                 fPage
         ));
@@ -143,8 +151,8 @@ public final class AkashClient implements Akash {
 
         var requestUri = addQueryParameters(
                 URI.create(baseUri + DEPLOYMENT_GET_URI),
-                new QueryParam("id.owner", owner),
-                new QueryParam("id.dseq", deploymentSequence)
+                new QueryParam(ID_OWNER, owner),
+                new QueryParam(ID_DSEQ, deploymentSequence)
         );
         log.debug("using {} path to get deployment", requestUri);
         var responseParser = ResponseParserBuilder
@@ -167,6 +175,7 @@ public final class AkashClient implements Akash {
         log.debug("listBids called with filters:  " +
                         "owner {}, deploymentSequence {}, groupSequence {} and oSeq {}" +
                         "providerId {}, state {}",
+                owner,
                 deploymentSequence,
                 groupSequence,
                 oSeq,
@@ -175,12 +184,12 @@ public final class AkashClient implements Akash {
 
         var requestUri = addQueryParameters(
                 URI.create(baseUri + BID_LIST_URI),
-                new QueryParam("filters.owner", owner),
-                new QueryParam("filters.dseq", deploymentSequence),
+                new QueryParam(FILTERS_OWNER, owner),
+                new QueryParam(FILTERS_DSEQ, deploymentSequence),
                 new QueryParam("filters.gseq", state),
                 new QueryParam("filters.oseq", state),
                 new QueryParam("filters.provider", state),
-                new QueryParam("filters.state", state)
+                new QueryParam(FILTERS_STATE, state)
                 //new QueryParam("pagination.key", nextPageKey)
         );
         log.debug("using {} path to list bids", requestUri);
@@ -195,7 +204,7 @@ public final class AkashClient implements Akash {
         return listRequest(requestUri, responseParser)
                 .map(fPage -> new AkashPagedIterable<>(
                         nextPage -> listRequest(addQueryParameters(requestUri,
-                                new QueryParam("pagination.key", nextPage)
+                                new QueryParam(PAGINATION_KEY, nextPage)
                         ), responseParser).get(),
                         fPage
                 ));
@@ -224,8 +233,8 @@ public final class AkashClient implements Akash {
 
         var requestUri = addQueryParameters(
                 URI.create(baseUri + BID_GET_URI),
-                new QueryParam("id.owner", owner),
-                new QueryParam("id.dseq", deploymentSequence),
+                new QueryParam(ID_OWNER, owner),
+                new QueryParam(ID_DSEQ, deploymentSequence),
                 new QueryParam("id.gseq", groupSequence),
                 new QueryParam("id.oseq", orderSequence),
                 new QueryParam("id.provider", providerId)
@@ -271,8 +280,8 @@ public final class AkashClient implements Akash {
 
         var requestUri = addQueryParameters(
                 URI.create(baseUri + LEASE_GET_URI),
-                new QueryParam("id.owner", owner),
-                new QueryParam("id.dseq", deploymentSequence),
+                new QueryParam(ID_OWNER, owner),
+                new QueryParam(ID_DSEQ, deploymentSequence),
                 new QueryParam("id.gseq", groupSequence),
                 new QueryParam("id.oseq", orderSequence),
                 new QueryParam("id.provider", provider)
@@ -315,12 +324,12 @@ public final class AkashClient implements Akash {
 
         var requestUri = addQueryParameters(
                 URI.create(baseUri + LEASE_LIST_URI),
-                new QueryParam("filters.owner", owner),
-                new QueryParam("filters.dseq", deploymentSequence),
+                new QueryParam(FILTERS_OWNER, owner),
+                new QueryParam(FILTERS_DSEQ, deploymentSequence),
                 new QueryParam("filters.gseq", state),
                 new QueryParam("filters.oseq", state),
                 new QueryParam("filters.provider", state),
-                new QueryParam("filters.state", state)
+                new QueryParam(FILTERS_STATE, state)
         );
         log.debug("using {} path to list leases", requestUri);
         var responseParser = ResponseParserBuilder
@@ -334,7 +343,7 @@ public final class AkashClient implements Akash {
         return listRequest(requestUri, responseParser)
                 .map(fPage -> new AkashPagedIterable<>(
                         nextPage -> listRequest(addQueryParameters(requestUri,
-                                new QueryParam("pagination.key", nextPage)
+                                new QueryParam(PAGINATION_KEY, nextPage)
                         ), responseParser).get(),
                         fPage
                 ));
@@ -345,9 +354,9 @@ public final class AkashClient implements Akash {
      * Helps to to a request of / list type
      *
      * @param requestUri     uri with query params already added
-     * @param responseParser
-     * @param <T>
-     * @return
+     * @param responseParser parses AkashPagedResponse
+     * @param <T>            Type of response.
+     * @return EIther a Paged reponse of T or a {@link OperationFailure}
      */
     private <T> Either<OperationFailure, AkashPagedResponse<T>> listRequest(
             URI requestUri,
@@ -412,6 +421,11 @@ public final class AkashClient implements Akash {
     private static final String LEASE_URI = "/api/akash/market/v1beta2/leases/";
     private static final String LEASE_GET_URI = LEASE_URI + "info";
     private static final String LEASE_LIST_URI = LEASE_URI + "list";
-
+    private static final String FILTERS_OWNER = "filters.owner";
+    private static final String FILTERS_DSEQ = "filters.dseq";
+    private static final String FILTERS_STATE = "filters.state";
+    private static final String PAGINATION_KEY = "pagination.key";
+    private static final String ID_OWNER = "id.owner";
+    private static final String ID_DSEQ = "id.dseq";
 
 }

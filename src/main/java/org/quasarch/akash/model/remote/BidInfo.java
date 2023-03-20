@@ -2,6 +2,15 @@ package org.quasarch.akash.model.remote;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * General info about a {@link Bid}
+ * <a href="https://docs.akash.network/other-resources/marketplace#bid">Bid State</a>
+ *
+ * @param bidId                {@link BidId}
+ * @param state                At this moment known values are: OPEN, ACTIVE, CLOSED TODO enum?!
+ * @param price Bid price - amount to be paid on every block.
+ * @param createdAtBlockHeight
+ */
 public record BidInfo(
         @JsonProperty("bid_id")
         BidId bidId,

@@ -20,6 +20,12 @@ public class AkashPagedIterable<T> implements Iterable<T> {
     private final PagedResponse<T> firstPage;
 
 
+    /**
+     * constructor
+     *
+     * @param dataFetcher Function which is responsible for fetching ( fetching more ) data when the page ends
+     * @param firstPage   The initial / already loaded, first page
+     */
     public AkashPagedIterable(Function<String, PagedResponse<T>> dataFetcher, PagedResponse<T> firstPage) {
         this.dataFetcher = dataFetcher;
         this.firstPage = firstPage;

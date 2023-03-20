@@ -8,6 +8,11 @@ import org.slf4j.LoggerFactory;
 import java.util.Iterator;
 import java.util.function.Function;
 
+/**
+ * Iterator for {@link org.quasarch.akash.model.AkashPagedResponse}
+ *
+ * @param <T> the type of data
+ */
 public class AkashPagedIterator<T> implements Iterator<T> {
     private static final Logger log = LoggerFactory.getLogger(AkashPagedIterator.class);
     private final Function<String, PagedResponse<T>> dataFetcher;
@@ -15,6 +20,12 @@ public class AkashPagedIterator<T> implements Iterator<T> {
     private Iterator<T> buffer;
     private int globalOffset = 0;
 
+    /**
+     * constructor
+     *
+     * @param dataFetcher function that knows how to fetch more data
+     * @param firstPage   the initial, already loaded, page
+     */
     public AkashPagedIterator(Function<String, PagedResponse<T>> dataFetcher, PagedResponse<T> firstPage) {
         this.dataFetcher = dataFetcher;
         currentPage = firstPage.paginationInfo();
