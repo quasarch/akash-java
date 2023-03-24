@@ -41,7 +41,7 @@ public interface Akash {
      * @param leaseId The id of the lease which will be terminated
      *                * @return Either {@link OperationFailure} or - if successful - {@link Deployment}
      * @return Either with {@link Deployment} or with 'left' failure containing {@link OperationFailure}
-     * @implNote Request through RPC
+     * @extended.implNote Request through RPC
      */
     Either<OperationFailure, Deployment> closedDeployment(String leaseId);
 
@@ -92,7 +92,7 @@ public interface Akash {
      * @param owner              owner, mandatory
      * @param deploymentSequence Deployment sequence, mandatory
      * @return Either {@link OperationFailure} or - if successful - {@link Deployment}
-     * @implSpec Request through REST.
+     * @extended.implSpec Request through REST.
      */
     Either<OperationFailure, Deployment> getDeployment(String owner, String deploymentSequence);
 
@@ -109,7 +109,7 @@ public interface Akash {
      * @param providerId         identification of the provider
      * @param state              ??
      * @return Either {@link OperationFailure} or - if successful - an {@link Iterable<Bid>}
-     * @implSpec Request through REST.
+     * @extended.implSpec Request through REST.
      */
     Either<OperationFailure, Iterable<Bid>> listBids(
             @Nullable String owner,

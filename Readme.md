@@ -93,3 +93,4 @@ From the current akash SDK, those are the expected errors:
 
 # References 
 
+https://docs.github.com/en/actions/publishing-packages/publishing-java-packages-with-maven

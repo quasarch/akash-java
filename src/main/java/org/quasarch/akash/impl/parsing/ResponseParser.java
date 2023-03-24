@@ -12,8 +12,17 @@ import java.net.http.HttpResponse;
  * @param <R> The expected return type on "right"/success cases.
  */
 public interface ResponseParser<R> {
+    /**
+     * @param response {@link HttpResponse} with string
+     * @return Either R or the failure
+     */
     Either<OperationFailure, R> parseToEither(HttpResponse<String> response);
 
+    /**
+     * @param statusCode integer with the http status code
+     * @param body       body in string representation
+     * @return Either R or the failure
+     */
     Either<OperationFailure, R> parseErrorMessage(int statusCode, String body);
 
 }

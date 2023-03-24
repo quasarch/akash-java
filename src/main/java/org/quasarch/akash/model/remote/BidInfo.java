@@ -8,8 +8,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  * @param bidId                {@link BidId}
  * @param state                At this moment known values are: OPEN, ACTIVE, CLOSED TODO enum?!
- * @param price Bid price - amount to be paid on every block.
- * @param createdAtBlockHeight
+ * @param price                Bid price - amount to be paid on every block.
+ * @param createdAtBlockHeight time of creating of this bid
  */
 public record BidInfo(
         @JsonProperty("bid_id")

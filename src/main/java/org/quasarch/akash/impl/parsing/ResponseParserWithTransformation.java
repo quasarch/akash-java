@@ -28,11 +28,23 @@ public class ResponseParserWithTransformation<I, R> implements ResponseParser<R>
     private final Class<I> jsonModelClass;
     private final Function<I, R> transformation;
 
+    /**
+     * constructor
+     *
+     * @param jsonModelClass response type, class
+     * @param transformation transformation function, from http response type
+     */
     public ResponseParserWithTransformation(Class<I> jsonModelClass, Function<I, R> transformation) {
         this.jsonModelClass = jsonModelClass;
         this.transformation = transformation;
     }
 
+    /**
+     * transforms a {@link HttpResponse} into a varv Either.
+     *
+     * @param response {@link HttpResponse} with string
+     * @return Either
+     */
     public Either<OperationFailure, R> parseToEither(HttpResponse<String> response) {
         final var body = response.body();
         if (response.statusCode() / 100 != 2) {
@@ -69,9 +81,9 @@ public class ResponseParserWithTransformation<I, R> implements ResponseParser<R>
         }
     }
 
- //   private static final List<Integer> AKASH_NETWORK_ERROR_CODES = List.of(1, 2, 20, 35, 39);
+    //   private static final List<Integer> AKASH_NETWORK_ERROR_CODES = List.of(1, 2, 20, 35, 39);
     private static final List<Integer> AUTH_ERROR_CODES = List.of(4, 23);
-    private static final List<Integer> BAD_REQUEST_CODES = List.of(3,6, 7, 8, 9, 10, 12, 15, 16, 17, 18, 19
+    private static final List<Integer> BAD_REQUEST_CODES = List.of(3, 6, 7, 8, 9, 10, 12, 15, 16, 17, 18, 19
             , 21, 22, 24, 26, 27, 28, 29, 30, 31, 32, 33, 34, 36, 37, 38);
     private static final List<Integer> STATE_ERROR_CODES = List.of(5, 11, 13, 25);
 

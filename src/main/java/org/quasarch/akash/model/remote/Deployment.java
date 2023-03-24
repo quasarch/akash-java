@@ -48,7 +48,7 @@ public record Deployment(
     /**
      * Amount deposited from owner account.
      *
-     * @param denom  todo dunno
+     * @param denom  denomination  todo dunno
      * @param amount todo amount
      */
     public record Balance(String denom,
@@ -118,13 +118,21 @@ public record Deployment(
             Funds funds
 
     ) {
-
-
     }
 
+    /**
+     * @param denom  denomination  denomination
+     * @param amount how much
+     */
     public record Funds(String denom, String amount) {
     }
 
+    /**
+     * @param groupId              {@link GroupId}
+     * @param state                State of the group.
+     * @param groupSpec            {@link GroupSpec}
+     * @param createdAtBlockHeight creation time of this group
+     */
     public record Group(
             @JsonProperty("group_id")
             GroupId groupId,
@@ -138,6 +146,11 @@ public record Deployment(
     ) {
     }
 
+    /**
+     * @param owner              Provider ID to withdraw funds for.
+     * @param deploymentSequence Deployment ID of group.
+     * @param groupSequence      Arbitrary sequence number. Internally incremented, starting at 1.
+     */
     public record GroupId(
             String owner,
             @JsonProperty("dseq")
@@ -147,28 +160,62 @@ public record Deployment(
     ) {
     }
 
+    /**
+     * @param name         string id
+     * @param requirements {@link Requirements}
+     * @param resources    {@link Resource}
+     */
     public record GroupSpec(String name,
                             Requirements requirements,
                             Collection<Resource> resources) {
     }
 
+    /**
+     * @param scope ??
+     * @param xid   ??
+     */
     public record Id(String scope, String xid) {
     }
 
+    /**
+     * Used to describe memory quantities
+     *
+     * @param quantity   {@link Quantity}
+     * @param attributes {@link Attribute}
+     */
     public record Memory(Quantity quantity,
                          Collection<Attribute> attributes) {
     }
 
+    /**
+     * Value to be used in a quantity
+     *
+     * @param val the value itself to be used as quantity
+     */
     public record Quantity(String val) {
 
     }
 
+    /**
+     * Requirements used in the group spec
+     *
+     * @param signedBy   {@link SignedBy}
+     * @param attributes {@link Attribute}
+     */
     public record Requirements(@JsonProperty("signed_by")
                                SignedBy signedBy,
                                Collection<Attribute> attributes) {
 
     }
 
+    /**
+     * Quantities of resources asked in a deployment
+     *
+     * @param cpu       {@link Cpu}
+     * @param memory    {@link Memory}
+     * @param storage   {@link Storage}
+     * @param endpoints {@link Endpoint}
+     */
     public record DeploymentResource(
             Cpu cpu,
             Memory memory,
@@ -178,16 +225,26 @@ public record Deployment(
 
     }
 
+    /**
+     * Deployment resource
+     *
+     * @param resources {@link DeploymentResource}
+     * @param count     how many
+     * @param price     {@link Price} the cost
+     */
     public record Resource(
             DeploymentResource resources,
             int count,
             Price price
     ) {
-
-
     }
 
-
+    /**
+     * Signature
+     *
+     * @param allOf ??
+     * @param anyOf ??
+     */
     public record SignedBy(@JsonProperty("all_of")
                            Collection<String> allOf,
                            @JsonProperty("any_of")
@@ -195,6 +252,13 @@ public record Deployment(
 
     }
 
+    /**
+     * Describes deployment requested storage, if any
+     *
+     * @param name       requested storage name
+     * @param quantity   {@link Quantity}
+     * @param attributes {@link Attribute}
+     */
     public record Storage(String name,
                           Quantity quantity,
                           Collection<Attribute> attributes) {
@@ -203,8 +267,8 @@ public record Deployment(
     /**
      * Amount disbursed from account via payments.
      *
-     * @param denom
-     * @param amount
+     * @param denom  denomination
+     * @param amount how much
      */
     public record Transferred(
             String denom,
@@ -213,6 +277,11 @@ public record Deployment(
 
     }
 
+    /**
+     * Unit
+     *
+     * @param val actual value
+     */
     public record Units(String val) {
 
     }

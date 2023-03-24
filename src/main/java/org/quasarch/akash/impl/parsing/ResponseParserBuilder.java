@@ -15,7 +15,7 @@ import java.util.function.Function;
  *                                 intermediate.pagination())
  *                 .build()
  * </pre>
- *
+ * <p>
  * Usage example (simples, nointermediate operation)
  * <pre>
  * ResponseParserBuilder
@@ -32,16 +32,27 @@ public class ResponseParserBuilder<R, I> {
     private ResponseParserBuilder() {
     }
 
+    /**
+     * @param resultClass type of result class
+     * @return ResponseParserBuilder
+     */
     public ResponseParserBuilder<R, I> withResultClass(Class<I> resultClass) {
         this.resultClass = resultClass;
         return this;
     }
 
+    /**
+     * @param transformation Function which is an intermediaty operation
+     * @return ResponseParserBuilder
+     */
     public ResponseParserBuilder<R, I> withIntermediateOperation(Function<I, R> transformation) {
         this.transformation = transformation;
         return this;
     }
 
+    /**
+     * @return builds a {@link ResponseParser} instance
+     */
     public ResponseParser<R> build() {
         if (resultClass == null) {
             throw new IllegalStateException("withResultClass must be called before build()");
@@ -51,7 +62,11 @@ public class ResponseParserBuilder<R, I> {
 
     }
 
-
+    /**
+     * @param <R> request class
+     * @param <I> result class
+     * @return instance of {@link ResponseParserBuilder}
+     */
     public static <R, I> ResponseParserBuilder<R, I> newBuilder() {
         return new ResponseParserBuilder<>();
     }

@@ -1,12 +1,25 @@
 package org.quasarch.akash.uri;
 
 import java.net.URI;
-import java.net.URLEncoder;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Utility class for operations related to Uri class
+ */
 public class UriUtils {
+    /**
+     * no op
+     */
+    private UriUtils() {
+    }
 
+    /**
+     * Adds one or multiple query parameter to a uri.
+     *
+     * @param basePath path to which query params will be appended
+     * @param params   to append
+     * @return a new URL with basePath?params
+     */
     public static URI addQueryParameters(URI basePath, QueryParam... params) {
 
         final boolean hasQueryAlready = basePath.getQuery() != null && !basePath.getQuery().isEmpty();
