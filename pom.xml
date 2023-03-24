@@ -11,10 +11,14 @@
     <description>Akash network client. Supports communication with akash network. For more information see LINK_HERE for
         spec
     </description>
-    <url>LINK_HERE</url>
-    <!--    <modules>
-            <module>examples</module>
-        </modules>-->
+    <url>http://www.quasarch.cloud/</url>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -130,5 +134,16 @@
         <!-- testing end -->
     </dependencies>
 
+    <!--
+    for public maven repository release, only when id is used.
+    more info: https://docs.github.com/en/actions/publishing-packages/publishing-java-packages-with-maven
+     -->
+    <distributionManagement>
+        <repository>
+            <id>ossrh</id>
+            <name>Central Repository OSSRH</name>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 
 </project>
