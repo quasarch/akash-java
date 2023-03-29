@@ -3,11 +3,11 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <packaging>jar</packaging>
-    <groupId>org.quasarch</groupId>
+    <groupId>cloud.quasarch</groupId>
     <artifactId>akash-java</artifactId>
-    <version>0.1</version>
+    <version>0.0.1</version>
+    <packaging>jar</packaging>
+    <name>${project.groupId}:${project.artifactId}</name>
     <description>Akash network client. Supports communication with akash network. For more information see LINK_HERE for
         spec
     </description>
@@ -19,6 +19,20 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+    <developers>
+        <developer>
+            <name>Gonçalo Silva</name>
+            <email>goncalosamuel@gmail.com</email>
+            <url>goncalosamuel@gmail.com</url>
+            <organization>quasarch</organization>
+            <organizationUrl>http://www.quasarch.cloud/</organizationUrl>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:git://github.com/quasarch/akash-java.git</connection>
+        <developerConnection>scm:git:ssh://github.com:quasarch/akash-java.git</developerConnection>
+        <url>https://github.com/quasarch/akash-java/tree/master</url>
+    </scm>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

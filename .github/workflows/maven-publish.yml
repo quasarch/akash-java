@@ -36,4 +36,5 @@ jobs:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
 
+# see this for keys https://central.sonatype.org/publish/publish-maven/#distributing-your-public-key
 
