@@ -92,7 +92,7 @@ From the current akash SDK, those are the expected errors:
 | ErrAppConfig               | 40     | error in app.toml                                                                         | ??           | ??                       |
 | ErrPanic                   | 111222 | panic                                                                                     | Yes          | AkashNetworkError        |
 
-# Deploy new version - locally
+# Deploy new version
 
 After having the required configuration in local settings.xml:
 
@@ -128,6 +128,7 @@ mvn clean deploy -P release
 
 # References
 
+[Sign and release using GitHub Actions #gpg](https://gist.github.com/sualeh/ae78dc16123899d7942bc38baba5203c#how-to-sign-and-release-to-the-central-repository-with-github-actions)
 [Publishing packages using git](https://docs.github.com/en/actions/publishing-packages/publishing-java-packages-with-maven)
 
 [Create, manage and upload private key](https://central.sonatype.org/publish/requirements/gpg/#distributing-your-public-key)

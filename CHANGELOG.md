@@ -1,6 +1,6 @@
-# Version 0.1
+# Version 0.0.1
 
-First release of the client. Supported features are:
+First release of the client. read/query support implemented; supported features are:
 
 - R_01 Create deployment Create a deployment based on an SDL file. Request through RPC.
 - R_02 Close deployment Close a deployment. Request through RPC
