@@ -105,11 +105,18 @@
                         <goals>
                             <goal>sign</goal>
                         </goals>
-                        <!-- if multiple keys exist locally -->
-                        <!--<configuration>
+                        <configuration>
+                            <!-- Prevent gpg from using pinentry programs -->
+                            <gpgArguments>
+                                <arg>--pinentry-mode</arg>
+                                <arg>loopback</arg>
+                            </gpgArguments>
+                            <!-- if multiple keys exist locally
                             <keyname>${gpg.keyname}</keyname>
                             <passphraseServerId>${gpg.keyname}</passphraseServerId>
-                        </configuration>-->
+                            -->
+                        </configuration>
+
                     </execution>
                 </executions>
             </plugin>
