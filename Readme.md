@@ -1,19 +1,18 @@
 # Akask SDK for Java
 
-The **Akask SDK for Java** enables Java developers to easily with with [Akash][akash] and build solutions
+The **Akask SDK for Java** enables Java developers to easily with [Akash](https://akash.network/) and build solutions
 on top of akash network.
 
 ## Release Notes ##
 
-Changes are tracked in [CHANGELOG.md][changes-file].
+Changes are tracked in [Change log file](CHANGELOG.md)
 
 ## Getting Started
 
 #### Minimum requirements ####
 
-To run the SDK you will need **Java 11+**. For more information about the requirements and optimum
-settings for the SDK, please see the [Installing a Java Development Environment][docs-java-env]
-section of the developer guide.
+To run the SDK you will need **Java 17+**. For more information about the requirements and optimum
+settings for the SDK, please see the [Installing](https://openjdk.org/install/) page.
 
 ## Features
 
@@ -32,18 +31,20 @@ Currently supported features include:
 ## Spec information
 
 This client was built based on
-this [https://github.com/akash-network/community/blob/main/sig-clients/client-libraries/prd.md][spec]
+this [spec](https://github.com/akash-network/community/blob/main/sig-clients/client-libraries/prd.md)
 
 ### Rest endpoint
-[Swagger][https://akash.c29r3.xyz/api/swagger/] 
+
+[Swagger](https://akash.c29r3.xyz/api/swagger/)
 
 # Open issues
 
 ## json format on deployments
-There's a "resources" inside of resources
-https://akash.c29r3.xyz/api/swagger/#/Query/Deployments
 
-# temp - error reference 
+There's a "resources" inside of resources [swagger](https://akash.c29r3.xyz/api/swagger/#/Query/Deployments)
+
+# WIP - error reference
+
 Error model
 From the current akash SDK, those are the expected errors:
 
@@ -91,5 +92,43 @@ From the current akash SDK, those are the expected errors:
 | ErrAppConfig               | 40     | error in app.toml                                                                         | ??           | ??                       |
 | ErrPanic                   | 111222 | panic                                                                                     | Yes          | AkashNetworkError        |
 
-# References 
+# Deploy new version - locally
+
+After having the required configuration in local settings.xml:
+
+## Staging
+
+After making sure gpg is installed and local maven settings.xml is configured with the required information of gpg:
+
+```xml
+
+<profile>
+    <id>ossrh</id>
+    <activation>
+        <activeByDefault>true</activeByDefault>
+    </activation>
+    <properties>
+        <gpg.executable>gpg</gpg.executable>
+        <gpg.passphrase>${PASSPHRASE}</gpg.passphrase>
+    </properties>
+</profile>
+```
+
+One can run:
+
+```shell
+mvn deploy
+```
+
+## Release
+
+```shell
+mvn clean deploy -P release
+```
+
+# References
+
+[Publishing packages using git](https://docs.github.com/en/actions/publishing-packages/publishing-java-packages-with-maven)
+
+[Create, manage and upload private key](https://central.sonatype.org/publish/requirements/gpg/#distributing-your-public-key)
 
