@@ -37,6 +37,8 @@ jobs:
           cat <(echo -e "${{ secrets.OSSRH_GPG_SECRET_KEY }}") | gpg --batch --import
           # Verify gpg secret key
           gpg --list-secret-keys --keyid-format LONG
+          # hack..
+          export GPG_TTY=$(tty)
       - name: Publish package to the Maven Central Repository
         run: |
           mvn \
