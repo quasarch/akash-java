@@ -9,6 +9,39 @@ Changes are tracked in [Change log file](CHANGELOG.md)
 
 ## Getting Started
 
+### Example
+A way of getting started might be to have a look at the example folder. In there you will find 
+an example project which makes use of the operations supported by this library.  
+For instance, to get a git one would write code similar to what can be found in GetBid.java:
+
+```java
+public class GetBid {
+    ///...
+    public static void main(String[] args) {
+        var akash = ExampleHelper.getClient();
+        var result = akash.getBid(owner, deploymentSequence, null, null, providerId);
+        if (result.isLeft()) {
+            log.info("Invocation failed, error is: " + result.getLeft());
+            System.exit(0);
+        }
+        log.info("fetched bid: {}", result.get());
+    }
+}
+```
+
+### Dependencies
+To import the library using maven, please add to your pom.xml:
+
+```xml
+<!-- https://mvnrepository.com/artifact/cloud.quasarch/akash-java -->
+<dependency>
+    <groupId>cloud.quasarch</groupId>
+    <artifactId>akash-java</artifactId>
+    <version>0.0.1</version>
+</dependency>
+
+```
+
 #### Minimum requirements ####
 
 To run the SDK you will need **Java 17+**. For more information about the requirements and optimum
@@ -18,14 +51,18 @@ settings for the SDK, please see the [Installing](https://openjdk.org/install/) 
 
 Currently supported features include:
 
-* R_01 Create deployment Create a deployment based on an SDL file. Request through RPC. 1
-* R_02 Close deployment Close a deployment. Request through RPC
 * R_03 List deployments List all deployments matching the filters with consideration for page limits. Request through
   REST. 1
 * R_04 Get deployment Request through REST. 1
 * R_05 List bids Get the list of bids based on a set of filters. Request through REST. 1
-* R_06 Create lease Request through RPC. 1
+
 * R_07 Get lease Get information regarding a lease such as its status. Request through REST. 1
+
+Future support will also include:
+* 
+* R_01 Create deployment Create a deployment based on an SDL file. Request through RPC. 1
+* R_02 Close deployment Close a deployment. Request through RPC
+* R_06 Create lease Request through RPC. 1
 * R_08 Send manifest Request through RPC.
 
 ## Spec information
