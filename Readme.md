@@ -12,7 +12,7 @@ Changes are tracked in [Change log file](CHANGELOG.md)
 ### Example
 A way of getting started might be to have a look at the example folder. In there you will find 
 an example project which makes use of the operations supported by this library.  
-For instance, to get a git one would write code similar to what can be found in GetBid.java:
+For instance, to get a bid one would write code similar to what can be found in GetBid.java:
 
 ```java
 public class GetBid {
