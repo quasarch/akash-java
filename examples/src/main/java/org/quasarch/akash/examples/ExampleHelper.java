@@ -1,7 +1,7 @@
 package org.quasarch.akash.examples;
 
-import org.quasarch.akash.Akash;
-import org.quasarch.akash.impl.AkashClient;
+import cloud.quasarch.akash.impl.Akash;
+import cloud.quasarch.akash.impl.AkashClient;
 
 import java.net.URI;
 import java.net.http.HttpClient;

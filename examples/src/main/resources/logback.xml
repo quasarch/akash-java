@@ -6,9 +6,11 @@
     </appender>
     <logger name="org.quasarch.akash" level="DEBUG" />
     <logger name="org.quasarch.akash.examples" level="DEBUG" />
-    <root level="debug">
+
+    <root level="INFO">
         <appender-ref ref="STDOUT" />
     </root>
+
 </configuration>
 
 
