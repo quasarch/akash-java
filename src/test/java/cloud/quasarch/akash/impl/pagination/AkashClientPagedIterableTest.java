@@ -1,8 +1,8 @@
 package cloud.quasarch.akash.impl.pagination;
 
-import org.junit.jupiter.api.Test;
 import cloud.quasarch.akash.impl.model.AkashPagedResponse;
 import cloud.quasarch.akash.impl.model.remote.PageInfo;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -10,8 +10,7 @@ import java.util.stream.StreamSupport;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class AkashPagedIterableTest {
-
+public class AkashClientPagedIterableTest {
 
     @Test
     public void itShouldCallNextOnBufferEnd() {
@@ -31,5 +30,4 @@ public class AkashPagedIterableTest {
         assertEquals(pageInfo.total(), resultList.size());
         assertEquals(4, functionCallCount.get());
     }
-
 }

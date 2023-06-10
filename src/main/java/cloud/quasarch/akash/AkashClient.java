@@ -1,13 +1,14 @@
-package cloud.quasarch.akash.impl;
+package cloud.quasarch.akash;
 
+import cloud.quasarch.akash.impl.client.AkashClientBuilder;
+import cloud.quasarch.akash.impl.model.OperationFailure;
+import cloud.quasarch.akash.impl.model.remote.Bid;
+import cloud.quasarch.akash.impl.model.remote.Deployment;
+import cloud.quasarch.akash.impl.model.remote.DeploymentLease;
 import io.vavr.control.Either;
 import org.jetbrains.annotations.Nullable;
-import cloud.quasarch.akash.impl.model.remote.Bid;
 
-import cloud.quasarch.akash.impl.model.remote.DeploymentLease;
-import cloud.quasarch.akash.impl.model.OperationFailure;
-import cloud.quasarch.akash.impl.model.remote.Deployment;
-
+import java.net.http.HttpClient;
 import java.nio.file.Path;
 
 /**
@@ -21,7 +22,11 @@ import java.nio.file.Path;
  * </p>
  * Open questions: Should we really use Either in this interface?
  */
-public interface Akash {
+public interface AkashClient {
+
+    /**
+     * createDeployment -> createLease -> sendManifest ->
+     */
 
     /**
      * Create a deployment based on an SDL file. Request through RPC.
@@ -173,5 +178,23 @@ public interface Akash {
             @Nullable String state
     );
 
+    interface Builder {
+        AkashClient build();
+    }
 
+    static BuilderToApiBaseUrl builder() {
+        return new AkashClientBuilder();
+    }
+
+    interface BuilderToApiBaseUrl {
+        ApiBaseUrlToAccount withApiBaseUrl(String apiBaseUrl);
+    }
+
+    interface ApiBaseUrlToAccount {
+        AccountToHttpClient forAccount(String accountAddress);
+    }
+
+    interface AccountToHttpClient extends Builder {
+        AkashClientBuilder withHttpClient(HttpClient httpClient);
+    }
 }

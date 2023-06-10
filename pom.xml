@@ -46,6 +46,7 @@
         <mockito-core>5.0.0</mockito-core>
         <jackson.version>2.14.1</jackson.version>
         <surefire.verion>3.0.0-M5</surefire.verion>
+        <assertj-core.version>3.24.2</assertj-core.version>
     </properties>
     <build>
         <plugins>
@@ -207,6 +208,12 @@
             <artifactId>mockito-core</artifactId>
             <version>${mockito-core}</version>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj-core.version}</version>
         </dependency>
         <!-- for test logs -->
         <dependency>

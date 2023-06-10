@@ -1,11 +1,11 @@
 package cloud.quasarch.akash.impl.parsing;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import io.vavr.control.Either;
 import cloud.quasarch.akash.impl.model.OperationFailure;
 import cloud.quasarch.akash.impl.model.remote.AkashErrorType;
 import cloud.quasarch.akash.impl.model.remote.ErrorResponse;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.vavr.control.Either;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -92,10 +92,15 @@ public class ResponseParserWithTransformation<I, R> implements ResponseParser<R>
      * contains singleton {@link ObjectMapper}
      */
     private static class ObjectMapperFactory {
-        private static ObjectMapper obj = new ObjectMapper();
+
+        private static ObjectMapper instance;
 
         public static ObjectMapper getInstance() {
-            return obj;
+            if (instance == null) {
+                instance = new ObjectMapper();
+            }
+
+            return instance;
         }
     }
 }

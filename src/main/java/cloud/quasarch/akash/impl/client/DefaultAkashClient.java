@@ -1,19 +1,16 @@
-package cloud.quasarch.akash.impl;
+package cloud.quasarch.akash.impl.client;
 
-import io.vavr.control.Either;
-import org.jetbrains.annotations.Nullable;
+import cloud.quasarch.akash.AkashClient;
+import cloud.quasarch.akash.impl.model.AkashPagedResponse;
+import cloud.quasarch.akash.impl.model.OperationFailure;
+import cloud.quasarch.akash.impl.model.remote.*;
 import cloud.quasarch.akash.impl.pagination.AkashPagedIterable;
 import cloud.quasarch.akash.impl.parsing.ResponseParser;
 import cloud.quasarch.akash.impl.parsing.ResponseParserBuilder;
-import cloud.quasarch.akash.impl.model.AkashPagedResponse;
-import cloud.quasarch.akash.impl.model.remote.Bid;
-import cloud.quasarch.akash.impl.model.remote.DeploymentLease;
-import cloud.quasarch.akash.impl.model.OperationFailure;
-import cloud.quasarch.akash.impl.model.remote.Deployment;
-import cloud.quasarch.akash.impl.model.remote.ListBidResponse;
-import cloud.quasarch.akash.impl.model.remote.ListDeploymentLeaseResponse;
-import cloud.quasarch.akash.impl.model.remote.ListDeploymentsResponse;
+import cloud.quasarch.akash.impl.uri.ApiEndpoints;
 import cloud.quasarch.akash.impl.uri.QueryParam;
+import io.vavr.control.Either;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import shaded_package.org.apache.commons.lang3.NotImplementedException;
@@ -32,42 +29,39 @@ import static cloud.quasarch.akash.impl.model.remote.AkashErrorType.ClientError;
 import static cloud.quasarch.akash.impl.uri.UriUtils.addQueryParameters;
 
 /**
- * Implementation of {@link Akash}.
+ * Implementation of {@link AkashClient}.
  */
-public final class AkashClient implements Akash {
+final class DefaultAkashClient implements AkashClient {
+
+    private static final Logger log = LoggerFactory.getLogger(DefaultAkashClient.class);
 
     private final String accountAddress;
-    private final URI baseUri;
-    private final Supplier<HttpClient> httpClientSupplier;
-    private static final Logger log = LoggerFactory.getLogger(AkashClient.class);
-    private static final String BASE_URI_ENV_VARIABLE_KEY = "QUASARCH_AKASH_BASE_URI";
+    private final URI apiBaseUri;
+    private HttpClient httpClient = HttpClient.newHttpClient();
 
     /**
-     * Uses QUASARCH_AKASH_BASE_URI env variable to get baseUri address
+     * Constructor for {@link DefaultAkashClient}
      *
-     * @param accountAddress address to be used when required.
+     * @param accountAddress     the address for the akt account
+     * @param apiBaseUri         base uri for the api
+     * @param httpClient supplier of {@link HttpClient}
      */
-    public AkashClient(String accountAddress) {
-        var envBaseUri = System.getenv(BASE_URI_ENV_VARIABLE_KEY);
-        Objects.requireNonNull(envBaseUri);
-        this.baseUri = URI.create(envBaseUri);
+    DefaultAkashClient(String accountAddress, URI apiBaseUri, HttpClient httpClient) {
         this.accountAddress = accountAddress;
-        // reuse same http client instance
-        final var httpClient = HttpClient.newHttpClient();
-        this.httpClientSupplier = () -> httpClient;
+        this.apiBaseUri = apiBaseUri;
+        Objects.requireNonNull(httpClient);
+        this.httpClient = httpClient;
     }
 
     /**
-     * Constructor for {@link AkashClient}
+     * Constructor for {@link DefaultAkashClient}
      *
-     * @param accountAddress     the address for the akt account
-     * @param baseUri            base uri for the api
-     * @param httpClientSupplier supplier of {@link HttpClient}
+     * @param accountAddress address to be used when required.
+     * @param apiBaseUri base uri for the api
      */
-    public AkashClient(String accountAddress, URI baseUri, Supplier<HttpClient> httpClientSupplier) {
+    DefaultAkashClient(String accountAddress, URI apiBaseUri) {
         this.accountAddress = accountAddress;
-        this.baseUri = baseUri;
-        this.httpClientSupplier = httpClientSupplier;
+        this.apiBaseUri = apiBaseUri;
     }
 
     @Override
@@ -96,7 +90,6 @@ public final class AkashClient implements Akash {
         throw new NotImplementedException("");
     }
 
-
     @Override
     public Either<OperationFailure, Iterable<Deployment>> listDeployments(
             String owner,
@@ -110,7 +103,7 @@ public final class AkashClient implements Akash {
                 deploymentSequence);
 
         var requestUri = addQueryParameters(
-                URI.create(baseUri + DEPLOYMENT_LIST_URI),
+                URI.create(apiBaseUri + ApiEndpoints.Deployments.LIST),
                 new QueryParam(FILTERS_OWNER, owner),
                 new QueryParam(FILTERS_DSEQ, deploymentSequence),
                 new QueryParam(FILTERS_STATE, state)
@@ -138,7 +131,7 @@ public final class AkashClient implements Akash {
      * @param owner              ??
      * @param deploymentSequence ??
      * @return Either {@link Deployment} or {@link OperationFailure} on failure
-     * @see Akash#getDeployment(String, String)
+     * @see AkashClient#getDeployment(String, String)
      */
     @Override
     public Either<OperationFailure, Deployment> getDeployment(String owner, String deploymentSequence) {
@@ -149,7 +142,7 @@ public final class AkashClient implements Akash {
         Objects.requireNonNull(deploymentSequence);
 
         var requestUri = addQueryParameters(
-                URI.create(baseUri + DEPLOYMENT_GET_URI),
+                URI.create(apiBaseUri + ApiEndpoints.Deployments.INFO),
                 new QueryParam(ID_OWNER, owner),
                 new QueryParam(ID_DSEQ, deploymentSequence)
         );
@@ -182,7 +175,7 @@ public final class AkashClient implements Akash {
                 state);
 
         var requestUri = addQueryParameters(
-                URI.create(baseUri + BID_LIST_URI),
+                URI.create(apiBaseUri + ApiEndpoints.Bids.LIST),
                 new QueryParam(FILTERS_OWNER, owner),
                 new QueryParam(FILTERS_DSEQ, deploymentSequence),
                 new QueryParam("filters.gseq", state),
@@ -231,7 +224,7 @@ public final class AkashClient implements Akash {
                 defaultsTo(orderSequence, () -> "1");
 
         var requestUri = addQueryParameters(
-                URI.create(baseUri + BID_GET_URI),
+                URI.create(apiBaseUri + ApiEndpoints.Bids.INFO),
                 new QueryParam(ID_OWNER, owner),
                 new QueryParam(ID_DSEQ, deploymentSequence),
                 new QueryParam("id.gseq", groupSequence),
@@ -278,7 +271,7 @@ public final class AkashClient implements Akash {
         Objects.requireNonNull(provider);
 
         var requestUri = addQueryParameters(
-                URI.create(baseUri + LEASE_GET_URI),
+                URI.create(apiBaseUri + ApiEndpoints.Leases.INFO),
                 new QueryParam(ID_OWNER, owner),
                 new QueryParam(ID_DSEQ, deploymentSequence),
                 new QueryParam("id.gseq", groupSequence),
@@ -297,7 +290,7 @@ public final class AkashClient implements Akash {
                 .withResultClass(DeploymentLease.class)
                 .build();
 
-        var bodyFuture = httpClientSupplier.get()
+        var bodyFuture = httpClient
                 .sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(responseParser::parseToEither);
 
@@ -322,7 +315,7 @@ public final class AkashClient implements Akash {
                 state);
 
         var requestUri = addQueryParameters(
-                URI.create(baseUri + LEASE_LIST_URI),
+                URI.create(apiBaseUri + ApiEndpoints.Leases.LIST),
                 new QueryParam(FILTERS_OWNER, owner),
                 new QueryParam(FILTERS_DSEQ, deploymentSequence),
                 new QueryParam("filters.gseq", state),
@@ -348,6 +341,28 @@ public final class AkashClient implements Akash {
                 ));
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DefaultAkashClient that = (DefaultAkashClient) o;
+        return Objects.equals(accountAddress, that.accountAddress) && Objects.equals(apiBaseUri, that.apiBaseUri) && Objects.equals(httpClient, that.httpClient);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(accountAddress, apiBaseUri, httpClient);
+    }
+
+    @Override
+    public String toString() {
+        return "DefaultAkashClient{" +
+               "accountAddress='" + accountAddress + '\'' +
+               ", apiBaseUri=" + apiBaseUri +
+               ", httpClient=" + httpClient +
+               '}';
+    }
+
     /**
      * for internal use
      * Helps to to a request of / list type
@@ -367,7 +382,7 @@ public final class AkashClient implements Akash {
                 .GET()
                 .build();
 
-        var bodyFuture = httpClientSupplier.get()
+        var bodyFuture = httpClient
                 .sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(responseParser::parseToEither);
 
@@ -383,7 +398,7 @@ public final class AkashClient implements Akash {
                 .GET()
                 .build();
 
-        var bodyFuture = httpClientSupplier.get()
+        var bodyFuture = httpClient
                 .sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(responseParser::parseToEither);
 
@@ -405,26 +420,12 @@ public final class AkashClient implements Akash {
             Thread.currentThread().interrupt();
             return Either.left(new OperationFailure(ClientError, ex.getMessage()));
         }
-
-
     }
 
-    private static final String DEPLOYMENT_URI = "/api/akash/deployment/v1beta2/deployments/";
-    private static final String DEPLOYMENT_LIST_URI = DEPLOYMENT_URI + "list";
-    private static final String DEPLOYMENT_GET_URI = DEPLOYMENT_URI + "info";
-
-    private static final String BID_URI = "/api/akash/market/v1beta2/bids/";
-    private static final String BID_GET_URI = BID_URI + "info";
-    private static final String BID_LIST_URI = BID_URI + "list";
-
-    private static final String LEASE_URI = "/api/akash/market/v1beta2/leases/";
-    private static final String LEASE_GET_URI = LEASE_URI + "info";
-    private static final String LEASE_LIST_URI = LEASE_URI + "list";
     private static final String FILTERS_OWNER = "filters.owner";
     private static final String FILTERS_DSEQ = "filters.dseq";
     private static final String FILTERS_STATE = "filters.state";
     private static final String PAGINATION_KEY = "pagination.key";
     private static final String ID_OWNER = "id.owner";
     private static final String ID_DSEQ = "id.dseq";
-
 }

@@ -1,10 +1,10 @@
-package cloud.quasarch.akash.impl;
+package cloud.quasarch.akash.impl.client;
 
+import cloud.quasarch.akash.impl.model.remote.AkashErrorType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -12,7 +12,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockserver.client.MockServerClient;
 import org.mockserver.junit.jupiter.MockServerExtension;
 import org.mockserver.matchers.Times;
-import cloud.quasarch.akash.impl.model.remote.AkashErrorType;
 
 import java.io.IOException;
 import java.net.URI;
@@ -28,11 +27,11 @@ import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
 
 /**
- * test for {@link AkashClient} implementation
+ * test for {@link DefaultAkashClient} implementation
  */
 
 @ExtendWith({MockitoExtension.class, MockServerExtension.class})
-public class AkashClientTest {
+public class DefaultAkashClientTest {
 
 
     private MockServerClient client;
@@ -53,7 +52,7 @@ public class AkashClientTest {
     @Test
     public void createDeploymentShouldThrowOnEmptySdlFile() {
 
-        var instance = new AkashClient("some-address", URI.create("http://localhost:" + client.getPort()), () -> HttpClient.newHttpClient());
+        var instance = new DefaultAkashClient("some-address", URI.create("http://localhost:" + client.getPort()), HttpClient.newHttpClient());
         Assertions.assertThrows(NullPointerException.class, () -> instance.createDeployment(null));
     }
 
@@ -67,10 +66,10 @@ public class AkashClientTest {
      */
     @Test
     public void listDeployments() throws IOException {
-        var instance = new AkashClient("some-address", URI.create("http://localhost:" + client.getPort()), HttpClient::newHttpClient);
+        var instance = new DefaultAkashClient("some-address", URI.create("http://localhost:" + client.getPort()), HttpClient.newHttpClient());
        /*
-        var instance = new AkashClient("some-address",
-        URI.create("https://akash.c29r3.xyz"), HttpClient::newHttpClient);
+        var instance = new DefaultAkashClient("some-address",
+        URI.create("https://akash.c29r3.xyz"), HttpClient.newHttpClient());
         */
         var response = Files.readString(Path.of("src/test/resources/responses/listDeployments-6-returns.json"));
         client.when(
@@ -89,9 +88,7 @@ public class AkashClientTest {
             return;
         }
         final AtomicInteger count = new AtomicInteger();
-        result.get().forEach(deployment -> {
-            count.incrementAndGet();
-        });
+        result.get().forEach(deployment -> count.incrementAndGet());
 
         // happy path
         assertFalse(result.isLeft());
@@ -105,7 +102,7 @@ public class AkashClientTest {
      */
     @Test
     public void listDeploymentsShouldMapHttpErrorsToFailure() throws IOException {
-        var instance = new AkashClient("some-address", URI.create("http://localhost:" + client.getPort()), HttpClient::newHttpClient);
+        var instance = new DefaultAkashClient("some-address", URI.create("http://localhost:" + client.getPort()), HttpClient.newHttpClient());
         var response = Files.readString(Path.of("src/test/resources/responses/listDeployments-error.json"));
         client.when(
                 request()
@@ -128,7 +125,7 @@ public class AkashClientTest {
      */
     @Test
     public void getDeployment() throws IOException {
-        var instance = new AkashClient("some-address", URI.create("http://localhost:" + client.getPort()), HttpClient::newHttpClient);
+        var instance = new DefaultAkashClient("some-address", URI.create("http://localhost:" + client.getPort()), HttpClient.newHttpClient());
 
         var responseBody = Files.readString(Path.of("src/test/resources/responses/info-deployment-ok-return.json"));
         client.when(
@@ -160,14 +157,14 @@ public class AkashClientTest {
     @ParameterizedTest
     @MethodSource("getDeploymentShouldFailOnMissingArgumentDataSupplier")
     public void getDeploymentShouldFailOnMissingArgument(String owner, String deploymentSequence) throws IOException {
-        var instance = new AkashClient("some-address", URI.create("http://localhost:" + client.getPort()), HttpClient::newHttpClient);
+        var instance = new DefaultAkashClient("some-address", URI.create("http://localhost:" + client.getPort()), HttpClient.newHttpClient());
         assertThrows(NullPointerException.class, () -> instance.getDeployment(owner, deploymentSequence));
 
     }
 
     @Test
     public void itShouldFollowPaginationOnListBids() throws IOException {
-        var instance = new AkashClient("some-address", URI.create("http://localhost:" + client.getPort()), HttpClient::newHttpClient);
+        var instance = new DefaultAkashClient("some-address", URI.create("http://localhost:" + client.getPort()), HttpClient.newHttpClient());
 
         var response = Files.readString(Path.of("src/test/resources/responses/listBids-ok.json"));
         client.when(
@@ -197,9 +194,9 @@ public class AkashClientTest {
 
     @Test
     public void itShouldListBids() throws IOException {
-        var instance = new AkashClient("some-address", URI.create("http://localhost:" + client.getPort()), HttpClient::newHttpClient);
-        /*var instance = new AkashClient("some-address",
-        URI.create("https://akash.c29r3.xyz"), HttpClient::newHttpClient);*/
+        var instance = new DefaultAkashClient("some-address", URI.create("http://localhost:" + client.getPort()), HttpClient.newHttpClient());
+        /*var instance = new DefaultAkashClient("some-address",
+        URI.create("https://akash.c29r3.xyz"), HttpClient.newHttpClient());*/
 
         var response = Files.readString(Path.of("src/test/resources/responses/listBids-ok.json"));
         client.when(
@@ -238,7 +235,7 @@ public class AkashClientTest {
      */
     @Test
     public void itShouldGetBid() throws IOException {
-        var instance = new AkashClient("some-address", URI.create("http://localhost:" + client.getPort()), HttpClient::newHttpClient);
+        var instance = new DefaultAkashClient("some-address", URI.create("http://localhost:" + client.getPort()), HttpClient.newHttpClient());
         var response = Files.readString(Path.of("src/test/resources/responses/get-bid-ok.json"));
         client.when(
                 request()
@@ -267,7 +264,7 @@ public class AkashClientTest {
 
     @Test
     public void itShouldGetLease() throws IOException {
-        var instance = new AkashClient("some-address", URI.create("http://localhost:" + client.getPort()), HttpClient::newHttpClient);
+        var instance = new DefaultAkashClient("some-address", URI.create("http://localhost:" + client.getPort()), HttpClient.newHttpClient());
         var response = Files.readString(Path.of("src/test/resources/responses/get-lease-ok.json"));
         client.when(
                 request()
@@ -295,7 +292,7 @@ public class AkashClientTest {
 
     @Test
     public void itShouldListLeases() throws IOException {
-        var instance = new AkashClient("some-address", URI.create("http://localhost:" + client.getPort()), HttpClient::newHttpClient);
+        var instance = new DefaultAkashClient("some-address", URI.create("http://localhost:" + client.getPort()), HttpClient.newHttpClient());
         var response = Files.readString(Path.of("src/test/resources/responses/listLeases-ok.json"));
         client.when(
                 request()

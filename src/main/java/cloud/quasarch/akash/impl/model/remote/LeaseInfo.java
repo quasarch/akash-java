@@ -17,7 +17,7 @@ public record LeaseInfo(
         Price price,
         @JsonProperty("created_at")
         String createdAtBlockHeight,
-        @JsonProperty(value = "closed_on", required = false)
+        @JsonProperty(value = "closed_on")
         @Nullable
         String closedAtBlockHeight
 
