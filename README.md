@@ -3,6 +3,8 @@
 The **Akask SDK for Java** enables Java developers to easily with [Akash](https://akash.network/) and build solutions
 on top of akash network.
 
+[![Open In Devbox.sh](https://jetpack.io/img/devbox/open-in-devbox.svg)](https://devbox.sh/https://github.com/quasarch/akash-java)
+
 ## Release Notes ##
 
 Changes are tracked in [Change log file](CHANGELOG.md)
